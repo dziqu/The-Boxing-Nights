@@ -1,0 +1,15 @@
+package Enumy;
+
+public enum EWiersze {
+	
+	// wiersze w pliku ustawieñ
+	
+	
+	private final Integer numerWiersza;
+	
+	private EWiersze(Integer numerWiersza) { 
+		this.numerWiersza = numerWiersza;
+	}
+	
+	public Integer zwróæNumerWiersza() { return numerWiersza; }
+}

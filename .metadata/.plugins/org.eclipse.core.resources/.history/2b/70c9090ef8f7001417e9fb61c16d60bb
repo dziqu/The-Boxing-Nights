@@ -1,0 +1,23 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Model.Enumy;
+
+/**
+ *
+ * @author Filip
+ */
+public enum ERenderery {
+    OpenGL1("LWJGL-OPENGL1"), OpenGL2("LWJGL-OpenGL2"), OpenGL3("LWJGL-OpenGL3");
+    
+    private final String renderer;
+    
+    private ERenderery(String renderer) {
+        this.renderer = renderer;
+    }
+    
+    public String zwróćRenderer() {
+        return renderer;
+    }
+}

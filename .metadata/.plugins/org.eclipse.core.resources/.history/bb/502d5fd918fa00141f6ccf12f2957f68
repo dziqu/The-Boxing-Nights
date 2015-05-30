@@ -1,0 +1,9 @@
+package Inne;
+
+public class Sterowanie {
+	
+	public Sterowanie() {
+		
+	}
+
+}

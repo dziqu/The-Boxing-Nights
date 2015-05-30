@@ -1,0 +1,72 @@
+package Inne;
+
+import com.jme3.system.AppSettings;
+
+import Enumy.EBuforSzablonowy;
+import Enumy.EG³êbiaKolorów;
+import Enumy.EMultipróbkowanie;
+import Enumy.ERenderery;
+import Interfejsy.IUstawienia;
+
+/**
+ * Klasa ustawia ustawienia wyœwietlania.
+ */
+public class Ustawienia implements IUstawienia {
+	
+	private final AppSettings ustawienia;
+	
+	public Ustawienia() { ustawienia = new AppSettings(true); }
+	
+	@Override
+	public AppSettings zwróæInstancjêKlasyAppSettings() { return ustawienia; }
+
+	@Override
+	public void ustawRenderer(ERenderery rodzajRenderera) { 
+		zwróæInstancjêKlasyAppSettings().setRenderer(rodzajRenderera.zwróæRenderer()); }
+
+	@Override
+	public void ustawG³êbiêKolorów(EG³êbiaKolorów g³êbiaKolorów) { 
+		zwróæInstancjêKlasyAppSettings().setBitsPerPixel(g³êbiaKolorów.zwróæIloœæBitówNaPiksel()); }
+
+	@Override
+	public void ustawIloœæKlatek(Integer iloœæKlatek) {
+		zwróæInstancjêKlasyAppSettings().setFrameRate(iloœæKlatek); }
+
+	@Override
+	public void ustawTrybPe³negoEkranu(Boolean czyUstawiæTrybPe³negoEkranu) {
+		zwróæInstancjêKlasyAppSettings().setFullscreen(czyUstawiæTrybPe³negoEkranu); }
+
+	@Override
+	public void ustawSzerokoœæ(Integer szerokoœæ) {
+		zwróæInstancjêKlasyAppSettings().setWidth(szerokoœæ); }
+
+	@Override
+	public void ustawWysokoœæ(Integer wysokoœæ) {	
+		zwróæInstancjêKlasyAppSettings().setHeight(wysokoœæ); }
+
+	@Override
+	public void ustawRodzielczoœæ(Integer szerokoœæ, Integer wysokoœæ) {
+		zwróæInstancjêKlasyAppSettings().setResolution(szerokoœæ, wysokoœæ); }
+
+	@Override
+	public void ustawMultipróbkowanie(EMultipróbkowanie multipróbkowanie) {
+		zwróæInstancjêKlasyAppSettings().setSamples(multipróbkowanie.zwróæIloœæPróbek()); }
+
+	@Override
+	public void ustawSynchronizacjêPionow¹(Boolean czyUstawiæSynchronizacjêPionow¹) {
+		zwróæInstancjêKlasyAppSettings().setVSync(czyUstawiæSynchronizacjêPionow¹);
+	}
+
+	@Override
+	public void ustawCzêstotliwoœæ(Integer czêstotliwoœæ) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void ustawBuforSzablonowy(EBuforSzablonowy buforSzablonowy) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

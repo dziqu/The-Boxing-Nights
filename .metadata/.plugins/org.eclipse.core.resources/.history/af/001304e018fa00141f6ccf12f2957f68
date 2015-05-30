@@ -1,0 +1,13 @@
+package Inne;
+
+import com.jme3.input.KeyInput;
+
+public class Sterowanie {
+	
+	private final static Trigger TRIGGER_DO_PRZODU = new KeyTrigger(KeyInput.KEY_A);
+	
+	public Sterowanie() {
+		
+	}
+
+}

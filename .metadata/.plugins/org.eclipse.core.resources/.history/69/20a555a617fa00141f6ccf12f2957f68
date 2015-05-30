@@ -1,0 +1,9 @@
+package Enumy;
+
+public enum ESterowanieGracza1 {
+	
+	private ESterowanie(String pozycja) {
+		
+	}
+
+}

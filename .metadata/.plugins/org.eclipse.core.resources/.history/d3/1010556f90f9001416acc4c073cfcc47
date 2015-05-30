@@ -1,0 +1,19 @@
+package Enumy;
+
+public enum ELokalizacjeINazwy {
+	
+	FOLDER_ZAPISU_STANÓW_GRY("zapisaneStanyGry"),
+	FOLDER_USTAWIEÑ("ustawienia"),
+	PLIK_USTAWIEÑ_WYSWIETLANIA(FOLDER_USTAWIEÑ.zwróæLokalizacjê() + "/ustawieniaWyswietlania.txt");
+    
+    private final String lokalizacja;
+    
+    private ELokalizacjeINazwy(String lokalizacja) {
+        this.lokalizacja = lokalizacja;
+    }
+    
+    public String zwróæLokalizacjê() {
+        return lokalizacja;
+    }
+
+}

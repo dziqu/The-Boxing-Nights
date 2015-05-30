@@ -1,0 +1,77 @@
+package PakietyPodstawowe.Start;
+
+import Kontroler.KontrolerMenuG³ównego;
+import Model.Enumy.EG³êbiaKolorów;
+import Model.Enumy.EMultipróbkowanie;
+import Model.Enumy.ERenderery;
+import Model.Enumy.ELokalizacjePlikówIFolderów;
+import Model.Inne.OperacjeNaPlikach;
+import Model.Inne.Ustawienia;
+import Model.ModelMenuG³ównego;
+import Widok.WidokMenuG³ównego;
+import com.jme3.app.SimpleApplication;
+import java.awt.DisplayMode;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Arrays;
+
+/**
+ * Klasa uruchamiaj¹ca program. Tworzy pliki i foldery je¿eli ich nie ma oraz
+ * inicjuje dane pocz¹tkowe.
+ */
+public final class KlasaStartowa extends SimpleApplication {
+
+    private OperacjeNaPlikach operacjeNaPlikach;
+    private static Ustawienia ustawienia;
+    private static GraphicsDevice urz¹dzenie;
+    private static DisplayMode[] trybyWyœwietlania;
+    private static List <DisplayMode> listaTrybówWyœwietlania;
+    private static DisplayMode value;
+    private List<Integer> integers = Arrays.asList(1,2,3,4,5);
+
+    public static void main(String[] args) {
+        KlasaStartowa app = new KlasaStartowa();
+//        ustawienia = new Ustawienia(app);
+//        urz¹dzenie = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+//        trybyWyœwietlania = urz¹dzenie.getDisplayModes();
+//        listaTrybówWyœwietlania = new ArrayList<DisplayMode>();
+//        for(int i = 0; i < trybyWyœwietlania.length; i++) {
+//            listaTrybówWyœwietlania.add(trybyWyœwietlania[i]);
+//        }
+//        
+//        app.setShowSettings(false);
+//        ustawienia.ustawRenderer(ERenderery.OpenGL1);
+//        ustawienia.ustawG³êbiêKolorów(EG³êbiaKolorów.BPP32);
+//        ustawienia.ustawIloœæKlatek(60);
+//        ustawienia.ustawTrybPe³negoEkranu(false);
+//        ustawienia.ustawRozdzielczoœæ(1024, 768);
+//        ustawienia.ustawMultipróbkowanie(EMultipróbkowanie.WY£¥CZ);
+//        ustawienia.ustawSynchronizacjêPionow¹(false);
+//        ustawienia.ustawCzêstotliwoœæ(60);
+//        app.setSettings(ustawienia.zwróæInstancjêKlasyAppSettings());
+        app.start();
+    }
+
+    @Override
+    public void simpleInitApp() {
+        operacjeNaPlikach = new OperacjeNaPlikach();
+        stwórzFolderZapisanychStanówGry(ELokalizacjePlikówIFolderów.FOLDER_ZAPISU_STANÓW_GRY.zwróæLokalizacjê());
+
+        WidokMenuG³ównego widokMenuG³ównego = new WidokMenuG³ównego();
+        ModelMenuG³ównego modelMenuG³ównego = new ModelMenuG³ównego();
+        KontrolerMenuG³ównego kontrolerMenuG³ównego = new KontrolerMenuG³ównego(widokMenuG³ównego, null, this);
+        kontrolerMenuG³ównego.wyœwietlMenuG³ówne();
+
+        ustawWidocznoœæKursora(true);
+    }
+
+    public void ustawWidocznoœæKursora(boolean czyKursorMaByæWidoczny) {
+        flyCam.setDragToRotate(czyKursorMaByæWidoczny);
+    }
+
+    public void stwórzFolderZapisanychStanówGry(String lokalizacjaFolderuDoStworzenia) {
+        operacjeNaPlikach.stwórzFolder(lokalizacjaFolderuDoStworzenia);
+    }
+}

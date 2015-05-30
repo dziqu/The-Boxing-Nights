@@ -1,0 +1,13 @@
+package PakietyPodstawowe.Model.Interfejsy;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.*;
+
+import org.apache.commons.io.FileUtils;
+
+public interface IIO {
+
+}

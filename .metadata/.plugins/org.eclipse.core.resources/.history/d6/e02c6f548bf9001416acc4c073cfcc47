@@ -1,0 +1,14 @@
+package Enumy;
+
+public enum EWiersze {
+	
+	// wiersze w pliku ustawieñ wyœwietlania
+	W£¥CZYÆ_EKRAN_DIALOGOWY(1);
+	
+	private final Integer numerWiersza;
+	
+	private EWiersze(Integer numerWiersza) { 
+		this.numerWiersza = numerWiersza;
+	}
+
+}

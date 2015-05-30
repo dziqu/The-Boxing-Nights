@@ -1,0 +1,26 @@
+package Enumy;
+
+public enum ENazwy {
+	
+	FOLDER_G£ÓWNY									("src\\"),
+	FOLDER_USTAWIEÑ									( FOLDER_G£ÓWNY.zwróæLokalizacjê() + "Ustawienia\\"),
+	PLIK_PRZECHOWUJ¥CY_LICZBÊ_URUCHOMIEÑ_PROGRAMU	(FOLDER_USTAWIEÑ.zwróæLokalizacjê() + "ustawienia.txt"),
+	PLIK_USTAWIEÑ_DOMYŒLNYCH_WYŒWIETLANIA			("TBNUstDomyœlne"),
+	PLIK_USTAWIEÑ_TYMCZASOWYCH_WYŒWIETLANIA			("TBNUstTymczasowe"),
+	
+	ŒCIE¯KA_DO_WIDOKU_MENU_NOWEJ_GRY				("Assety/Interfejs/menuNowejGry.xml"),
+	ŒCIE¯KA_DO_WIDOKU_MENU_G£ÓWNEGO					("Assety/Interfejs/menuGlowne.xml"),
+	ŒCIE¯KA_DO_WIDOKU_MENU_USTAWIEÑ					("Assety/Interfejs/ustawienia.xml"),
+	ŒCIE¯KA_DO_WIDOKU_USTAWIEÑ_WYŒWIETLANIA			("Assety/Interfejs/ustawieniaWyswietlania.xml"),
+	NAZWA_MENU_NOWEJ_GRY							("menuNowejGry"),
+	NAZWA_MENU_G£ÓWNEGO								("menuG³ówne"),
+	NAZWA_MENU_USTAWIEÑ								("ustawienia"),
+	NAZWA_USTAWIEÑ_WYŒWIETLANIA						("ustawieniaWysietlania");
+    
+    private final String lokalizacja;
+    
+    private ENazwy(String lokalizacja) 	{ this.lokalizacja = lokalizacja; }
+    
+    public String zwróæLokalizacjê() 	{ return lokalizacja; }
+
+}

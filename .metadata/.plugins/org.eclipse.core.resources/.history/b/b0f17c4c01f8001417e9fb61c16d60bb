@@ -1,0 +1,17 @@
+package PakietyPodstawowe.Model.Interfejsy;
+
+import java.util.List;
+
+public interface IIO {
+	
+	public static void drukuj(T s) {
+		System.out.print(s);
+	}
+	public static void drukujL(String wiadomoœæDoWydrukowania) {
+		System.out.println(wiadomoœæDoWydrukowania);
+	}
+	public static <T> void drukuj(List<T> lista) {
+		lista.forEach(s -> drukuj(s));
+	}
+
+}

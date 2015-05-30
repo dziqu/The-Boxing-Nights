@@ -1,0 +1,24 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Model.Enumy;
+
+/**
+ *
+ * @author Filip
+ */
+public enum EGłębiaKolorów {
+    
+    BPP1(1), BPP2(2), BPP4(4), BPP8(8), BPP24(24), BPP32(32);
+    
+    private final Integer ilośćBitówNaPiksel;
+    
+    private EGłębiaKolorów(Integer ilośćBitówNaPiksel) {
+        this.ilośćBitówNaPiksel = ilośćBitówNaPiksel;
+    }
+    
+    public Integer zwróćIlośćBitówNaPiksel() {
+        return ilośćBitówNaPiksel;
+    }
+}

@@ -1,0 +1,11 @@
+package Enumy;
+
+public enum ESterowanieGracza1 {
+	
+	private final String pozycja;
+	
+	private ESterowanieGracza1(String pozycja) {
+		this.pozycja = pozycja;
+	}
+
+}

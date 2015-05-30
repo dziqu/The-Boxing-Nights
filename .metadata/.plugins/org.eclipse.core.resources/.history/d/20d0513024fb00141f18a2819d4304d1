@@ -1,0 +1,82 @@
+package PakietyPodstawowe.Start;
+
+import java.io.File;
+import java.util.List;
+
+import Enumy.ENazwy;
+import Enumy.EWiersze;
+import Inne.IO;
+import Inne.Porównania;
+import Inne.UstawieniaWyświetlania;
+import PakietyPodstawowe.Kontroler.KontrolerMenuGłównego;
+import PakietyPodstawowe.Widok.WidokMenuGłównego;
+
+import com.jme3.app.SimpleApplication;
+
+/**
+ * Klasa uruchamiająca program. Tworzy pliki i foldery jeżeli ich nie ma oraz
+ * inicjuje dane początkowe.
+ */
+public final class KlasaStartowa extends SimpleApplication {
+
+    public static void main(String[] args) {
+    	// TODO mechanizm refleksji
+    	// TODO wyrażenia regularne (sprawdzanie argumentów, przykład w ustawieniach)
+        KlasaStartowa app = new KlasaStartowa();
+        UstawieniaWyświetlania ustawieniaWyświetlania = new UstawieniaWyświetlania(app);
+        ustawieniaWyświetlania.inicjujUstawieniaPoczątkowe();
+        List <String> daneZPlikuUstawień = IO.skanuj(new File(ENazwy.PLIK_PRZECHOWUJĄCY_LICZBĘ_URUCHOMIEŃ_PROGRAMU.zwróćLokalizację()));
+        int rozmiarListyDanychPobranychZPlikuUstawień = daneZPlikuUstawień.size();
+        Boolean wPlikuUstawieńSąJużZapisaneUstawieniaSterowania = Porównania.porównaj(rozmiarListyDanychPobranychZPlikuUstawień, 1) > 0;
+        app.inicjujPlikUstawień();
+        app.start();
+    }
+
+    @Override
+    public void simpleInitApp() {
+    	
+        WidokMenuGłównego widokMenuGłównego = new WidokMenuGłównego();
+        KontrolerMenuGłównego kontrolerMenuGłównego = new KontrolerMenuGłównego(widokMenuGłównego, null, this);
+        kontrolerMenuGłównego.wyświetlMenuGłówne();
+
+        ustawWidocznośćKursora(true);
+    }
+    
+    private void inicjujPlikUstawień() {
+    	List <String> listaUstawień = IO.skanuj(new File(ENazwy.PLIK_PRZECHOWUJĄCY_LICZBĘ_URUCHOMIEŃ_PROGRAMU.zwróćLokalizację()));
+    	listaUstawień.add(EWiersze.GRACZ_1_PRZÓD.zwróćWartośćDomyślną());
+    	listaUstawień.add(EWiersze.GRACZ_1_TYŁ.zwróćWartośćDomyślną());
+    	listaUstawień.add(EWiersze.GRACZ_1_LEWO.zwróćWartośćDomyślną());
+    	listaUstawień.add(EWiersze.GRACZ_1_PRAWO.zwróćWartośćDomyślną());
+    	listaUstawień.add(EWiersze.GRACZ_1_LEWA_GÓRA.zwróćWartośćDomyślną());
+    	listaUstawień.add(EWiersze.GRACZ_1_LEWA_DÓŁ.zwróćWartośćDomyślną());
+    	listaUstawień.add(EWiersze.GRACZ_1_PRAWA_GÓRA.zwróćWartośćDomyślną());
+    	listaUstawień.add(EWiersze.GRACZ_1_PRAWA_DÓŁ.zwróćWartośćDomyślną());
+    	listaUstawień.add(EWiersze.GRACZ_1_LEWY_PROSTY.zwróćWartośćDomyślną());
+    	listaUstawień.add(EWiersze.GRACZ_1_PRAWY_PROSTY.zwróćWartośćDomyślną());
+    	listaUstawień.add(EWiersze.GRACZ_1_LEWY_SIERPOWY.zwróćWartośćDomyślną());
+    	listaUstawień.add(EWiersze.GRACZ_1_PRAWY_SIERPOWY.zwróćWartośćDomyślną());
+    	listaUstawień.add(EWiersze.GRACZ_1_LEWY_HAK.zwróćWartośćDomyślną());
+    	listaUstawień.add(EWiersze.GRACZ_1_PRAWY_HAK.zwróćWartośćDomyślną());
+    	listaUstawień.add(EWiersze.GRACZ_2_PRZÓD.zwróćWartośćDomyślną());
+    	listaUstawień.add(EWiersze.GRACZ_2_TYŁ.zwróćWartośćDomyślną());
+    	listaUstawień.add(EWiersze.GRACZ_2_LEWO.zwróćWartośćDomyślną());
+    	listaUstawień.add(EWiersze.GRACZ_2_PRAWO.zwróćWartośćDomyślną());
+    	listaUstawień.add(EWiersze.GRACZ_2_LEWA_GÓRA.zwróćWartośćDomyślną());
+    	listaUstawień.add(EWiersze.GRACZ_2_LEWA_DÓŁ.zwróćWartośćDomyślną());
+    	listaUstawień.add(EWiersze.GRACZ_2_PRAWA_GÓRA.zwróćWartośćDomyślną());
+    	listaUstawień.add(EWiersze.GRACZ_2_PRAWA_DÓŁ.zwróćWartośćDomyślną());
+    	listaUstawień.add(EWiersze.GRACZ_2_LEWY_PROSTY.zwróćWartośćDomyślną());
+    	listaUstawień.add(EWiersze.GRACZ_2_PRAWY_PROSTY.zwróćWartośćDomyślną());
+    	listaUstawień.add(EWiersze.GRACZ_2_LEWY_SIERPOWY.zwróćWartośćDomyślną());
+    	listaUstawień.add(EWiersze.GRACZ_2_PRAWY_SIERPOWY.zwróćWartośćDomyślną());
+    	listaUstawień.add(EWiersze.GRACZ_2_LEWY_HAK.zwróćWartośćDomyślną());
+    	listaUstawień.add(EWiersze.GRACZ_2_PRAWY_HAK.zwróćWartośćDomyślną());
+    	
+    	IO.drukujL(new File(ENazwy.PLIK_PRZECHOWUJĄCY_LICZBĘ_URUCHOMIEŃ_PROGRAMU.zwróćLokalizację()), listaUstawień);
+    }
+
+    public void ustawWidocznośćKursora(boolean czyKursorMaByćWidoczny) {
+        flyCam.setDragToRotate(czyKursorMaByćWidoczny);
+    }
+}

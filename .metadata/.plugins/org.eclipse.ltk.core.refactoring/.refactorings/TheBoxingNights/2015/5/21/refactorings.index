@@ -1,0 +1,23 @@
+1432380068699	Delete element
+1432381006503	Encapsulate field 'viewPort'
+1432381012181	Encapsulate field 'assetManager'
+1432381016737	Encapsulate field 'inputManager'
+1432381020815	Encapsulate field 'audioRenderer'
+1432381024114	Encapsulate field 'guiViewPort'
+1432381027139	Encapsulate field 'stateManager'
+1432381033511	Encapsulate field 'screen'
+1432381037756	Encapsulate field 'modelMenuNowejGry'
+1432382413429	Delete element
+1432383358447	Delete element
+1432383377510	Rename type 'WidokMenuGłównego'
+1432383778122	Move compilation unit
+1432384011034	Rename type 'WidokMenuNowejGry'
+1432384021595	Delete element
+1432384175682	Move compilation unit
+1432384181610	Delete elements
+1432387770505	Delete element
+1432387986446	Delete element
+1432388000243	Rename resource 'ustawieniaGui.xml'
+1432393491356	Rename method 'nowaGra'
+1432393539221	Delete element
+1432393797634	Rename method 'wyświetlUstawienia'

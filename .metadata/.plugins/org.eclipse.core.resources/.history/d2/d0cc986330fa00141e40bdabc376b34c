@@ -1,0 +1,44 @@
+package Enumy;
+
+public enum EWiersze {
+	
+	// numery wierszów w pliku ustawieñ
+	LICZBA_URUCHOMIEÑ_PROGRAMU	(0),
+	
+	GRACZ_1_PRZÓD				(LICZBA_URUCHOMIEÑ_PROGRAMU.zwróæNumerWiersza() + 1),
+	GRACZ_1_TY£					(GRACZ_1_PRZÓD.zwróæNumerWiersza() + 1),
+	GRACZ_1_LEWO				(GRACZ_1_TY£.zwróæNumerWiersza() + 1),
+	GRACZ_1_PRAWO				(GRACZ_1_LEWO.zwróæNumerWiersza() + 1),
+	GRACZ_1_LEWA_GÓRA			(GRACZ_1_PRAWO.zwróæNumerWiersza() + 1),
+	GRACZ_1_LEWA_DÓ£			(GRACZ_1_LEWA_GÓRA.zwróæNumerWiersza() + 1),
+	GRACZ_1_PRAWA_GÓRA			(GRACZ_1_LEWA_DÓ£.zwróæNumerWiersza() + 1),
+	GRACZ_1_PRAWA_DÓ£			(GRACZ_1_PRAWA_GÓRA.zwróæNumerWiersza() + 1),
+	GRACZ_1_LEWY_PROSTY			(GRACZ_1_PRAWA_DÓ£.zwróæNumerWiersza() + 1),
+	GRACZ_1_PRAWY_PROSTY		(GRACZ_1_LEWY_PROSTY.zwróæNumerWiersza() + 1),
+	GRACZ_1_LEWY_SIERPOWY		(GRACZ_1_PRAWY_PROSTY.zwróæNumerWiersza() + 1),
+	GRACZ_1_PRAWY_SIERPOWY		(GRACZ_1_LEWY_SIERPOWY.zwróæNumerWiersza() + 1),
+	GRACZ_1_LEWY_HAK			(GRACZ_1_PRAWY_SIERPOWY.zwróæNumerWiersza() + 1),
+	GRACZ_1_PRAWY_HAK			(GRACZ_1_LEWY_HAK.zwróæNumerWiersza() + 1),
+	
+	GRACZ_2_PRZÓD				(GRACZ_1_PRAWY_HAK.zwróæNumerWiersza() + 1),
+	GRACZ_2_TY£					(GRACZ_2_PRZÓD.zwróæNumerWiersza() + 1),
+	GRACZ_2_LEWO				(GRACZ_2_TY£.zwróæNumerWiersza() + 1),
+	GRACZ_2_PRAWO				(GRACZ_2_LEWO.zwróæNumerWiersza() + 1),
+	GRACZ_2_LEWA_GÓRA			(GRACZ_2_PRAWO.zwróæNumerWiersza() + 1),
+	GRACZ_2_LEWA_DÓ£			(GRACZ_2_LEWA_GÓRA.zwróæNumerWiersza() + 1),
+	GRACZ_2_PRAWA_GÓRA			(GRACZ_2_LEWA_DÓ£.zwróæNumerWiersza() + 1),
+	GRACZ_2_PRAWA_DÓ£			(GRACZ_2_PRAWA_GÓRA.zwróæNumerWiersza() + 1),
+	GRACZ_2_LEWY_PROSTY			(GRACZ_2_PRAWA_DÓ£.zwróæNumerWiersza() + 1),
+	GRACZ_2_PRAWY_PROSTY		(GRACZ_2_LEWY_PROSTY.zwróæNumerWiersza() + 1),
+	GRACZ_2_LEWY_SIERPOWY		(GRACZ_2_PRAWY_PROSTY.zwróæNumerWiersza() + 1),
+	GRACZ_2_PRAWY_SIERPOWY		(GRACZ_2_LEWY_SIERPOWY.zwróæNumerWiersza() + 1),
+	GRACZ_2_LEWY_HAK			(GRACZ_2_PRAWY_SIERPOWY.zwróæNumerWiersza() + 1),
+	GRACZ_2_PRAWY_HAK			(GRACZ_2_LEWY_HAK.zwróæNumerWiersza() + 1);
+	
+	
+	private final Integer numerWiersza;
+	
+	private EWiersze(Integer numerWiersza) 	{ this.numerWiersza = numerWiersza; }
+	
+	public Integer zwróæNumerWiersza() 		{ return numerWiersza; }
+}

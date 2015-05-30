@@ -1,0 +1,7 @@
+package PakietyPodstawowe.Model.Inne;
+
+import PakietyPodstawowe.Model.Interfejsy.IIO;
+
+public class IO {
+
+}

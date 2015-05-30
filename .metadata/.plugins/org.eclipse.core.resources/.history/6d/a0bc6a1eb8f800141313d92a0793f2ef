@@ -1,0 +1,7 @@
+package Interfejsy;
+
+public interface IUstawienia {
+	
+	public AppSettings zwróæInstancjêKlasyAppSettings();
+
+}

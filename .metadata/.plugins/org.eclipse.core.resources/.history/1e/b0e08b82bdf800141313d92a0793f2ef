@@ -1,0 +1,83 @@
+package Interfejsy;
+
+import Enumy.EBuforSzablonowy;
+import Enumy.EG³êbiaKolorów;
+import Enumy.EMultipróbkowanie;
+import Enumy.ERenderery;
+
+import com.jme3.system.AppSettings;
+
+/**
+ * Implementuje metody ustawieñ.
+ * @author Filip Ho³ówko
+ */
+public interface IUstawienia {
+	
+	/**
+	 * Ustawia instancjê klasy AppSettings.
+	 * @param ustawienia instancja klasy AppSettings
+	 */
+	public void ustawInstancjêKlasyAppSettings(AppSettings ustawienia);
+	
+	/**
+	 * Zwraca instancjê klasy AppSettings.
+	 * @return instancja klasy AppSettings
+	 */
+	public AppSettings zwróæInstancjêKlasyAppSettings();
+	
+	/**
+	 * Ustawia renderer.
+	 * @param rodzajRenderera rodzaj renderera
+	 */
+	public void ustawRenderer(ERenderery rodzajRenderera);
+	
+	/**
+	 * Ustawia g³êbiê kolorów.
+	 * @param g³êbiaKolorów g³êbiaKolorów
+	 */
+	public void ustawG³êbiêKolorów(EG³êbiaKolorów g³êbiaKolorów);
+	
+	/**
+	 * Ustawia iloœæ klatek.
+	 * @param iloœæKlatek iloœæ klatek
+	 */
+	public void ustawIloœæKlatek(Integer iloœæKlatek);
+	
+	/**
+	 * Ustawia tryb pe³nego ekranu.
+	 * @param czyUstawiæTrybPe³negoEkranu czy ustawiæ tryb pe³nego ektanu
+	 */
+	public void ustawTrybPe³negoEkranu(Boolean czyUstawiæTrybPe³negoEkranu);
+	
+	/**
+	 * Ustawia szerokoœæ.
+	 * @param szerokoœæ szerokoœæ
+	 */
+	public void ustawSzerokoœæ(Integer szerokoœæ);
+	
+	/**
+	 * Ustawia wysokoœæ.
+	 * @param wysokoœæ wysokoœæ
+	 */
+	public void ustawWysokoœæ(Integer wysokoœæ);
+	
+	/**
+	 * Ustawia rozdzielczoœæ.
+	 * @param szerokoœæ szerokoœæ
+	 * @param wysokoœæ wysokoœæ
+	 */
+	public void ustawRodzielczoœæ(Integer szerokoœæ, Integer wysokoœæ);
+	
+	/**
+	 * Ustawia multipróbkowanie.
+	 * @param multipróbkowanie multipróbkowanie
+	 */
+	public void ustawMultipróbkowanie(EMultipróbkowanie multipróbkownie);
+	
+	public void ustawSynchronizacjêPionow¹(Boolean czyUstawiæSynchronizacjêPionow¹);
+	
+	public void ustawCzêstotliwoœæ(Integer czêstotliwoœæ);
+	
+	public void ustawBuforSzablonowy(EBuforSzablonowy buforSzablonowy);
+
+}

@@ -1,0 +1,7 @@
+package Inne;
+
+import Interfejsy.IUstawienia;
+
+public class Ustawienia implements IUstawienia {
+
+}

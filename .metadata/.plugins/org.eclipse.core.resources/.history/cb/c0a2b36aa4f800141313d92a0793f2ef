@@ -1,0 +1,35 @@
+package TestyJednostkowe;
+
+import static PakietyPodstawowe.Model.Inne.IO.*;
+
+import java.io.File;
+import java.util.Arrays;
+
+import org.junit.Test;
+
+public class IOTest {
+
+//	@Test
+//	public void drukujTest() {
+//		drukuj("Witaj");
+//		drukuj("Witaj");
+//	}
+	
+//	@Test
+//	public void drukujZNow¹Lini¹() {
+//		drukujL("Hej");
+//		drukujL("Hej");
+//	}
+//	
+//	@Test
+//	public void drukujDoPliku() {
+//		File plik = new File("test/test.txt");
+//		drukuj(plik, "Witaj");
+//	}
+	
+	@Test
+	public void drukujListêDoPliku() {
+		List <String> lista = Arrays.asList("Hej", "Co tam?");
+	}
+
+}

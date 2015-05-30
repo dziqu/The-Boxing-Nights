@@ -1,0 +1,17 @@
+package PakietyPodstawowe.Model.Enumy;
+
+public enum EG³êbiaKolorów {
+	
+BPP1(1), BPP2(2), BPP4(4), BPP8(8), BPP24(24), BPP32(32);
+    
+    private final Integer iloœæBitówNaPiksel;
+    
+    private EG³êbiaKolorów(Integer iloœæBitówNaPiksel) {
+        this.iloœæBitówNaPiksel = iloœæBitówNaPiksel;
+    }
+    
+    public Integer zwróæIloœæBitówNaPiksel() {
+        return iloœæBitówNaPiksel;
+    }
+
+}

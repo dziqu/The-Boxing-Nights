@@ -1,0 +1,58 @@
+package PakietyPodstawowe.Kontroler;
+
+import Inne.IO;
+import PakietyPodstawowe.Model.ModelUstawieñWyœwietlania;
+
+import com.jme3.app.Application;
+import com.jme3.app.SimpleApplication;
+import com.jme3.app.state.AbstractAppState;
+import com.jme3.app.state.AppStateManager;
+
+import de.lessvoid.nifty.Nifty;
+import de.lessvoid.nifty.NiftyEventSubscriber;
+import de.lessvoid.nifty.controls.RadioButtonStateChangedEvent;
+import de.lessvoid.nifty.screen.Screen;
+import de.lessvoid.nifty.screen.ScreenController;
+
+public class KontrolerUstawieñWyœwietlania extends AbstractAppState implements ScreenController {
+	// TODO: <screen id="ustawieniaWyswietlania" controller="PakietyPodstawowe.Kontroler.KontrolerUstawieñWyœwietlania">
+	private SimpleApplication app;
+	private AppStateManager stateManager;
+	private ModelUstawieñWyœwietlania modelUstawieñWyœwietlania;
+
+	@Override
+	public void initialize(AppStateManager stateManager, Application app) {
+		try {
+			super.initialize(stateManager, app);
+			this.modelUstawieñWyœwietlania = new ModelUstawieñWyœwietlania();
+			this.app = (SimpleApplication) app;
+			this.stateManager = this.app.getStateManager();
+			modelUstawieñWyœwietlania.inicjujObiekty(this.app);
+			modelUstawieñWyœwietlania.wyœwietlMenuG³ówne(this);
+		} catch (Exception ex) { ex.printStackTrace(); }
+	}
+	
+	@NiftyEventSubscriber(id="GRadioButton")
+	public void czesc(final String id, final RadioButtonStateChangedEvent event) {
+		System.out.println("Siema");
+	}
+
+	@Override
+	public void bind(Nifty nifty, Screen screen) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onEndScreen() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onStartScreen() {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

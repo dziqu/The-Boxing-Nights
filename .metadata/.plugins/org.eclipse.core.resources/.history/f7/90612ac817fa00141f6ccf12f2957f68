@@ -1,0 +1,13 @@
+package Enumy;
+
+public enum ESterowanieGracza1 {
+	
+	DO_PRZODU();
+	
+	String pozycja;
+	
+	private ESterowanieGracza1(String pozycja) {
+		this.pozycja = pozycja;
+	}
+
+}

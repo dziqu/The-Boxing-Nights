@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<nifty>
+    <useControls filename="nifty-default-controls.xml"/>
+    <useStyles filename="nifty-default-styles.xml"/>
+    <screen id="ustawieniaWyswietlania" controller="PakietyPodstawowe.Kontroler.KontrolerUstawieńWyświetlania">
+        <layer id="GLayer0" childLayout="center">
+        	<control id="RadioGroupRenderery" name="radioButtonGroup"/>
+            <panel id="GPanel0" childLayout="vertical" width="100%" style="nifty-panel-simple" height="100%">
+                <panel id="GPanel1" childLayout="vertical" width="100%" style="nifty-panel-simple" height="12%">
+                    <panel id="GPanel13" childLayout="absolute" width="100%" style="nifty-panel-simple" height="50%">
+                        <control name="label" id="GLabel0" width="100px" text="Renderer:" height="50px" font="aurulent-sans-16.fnt"/>
+                    </panel>
+                    <panel id="GPanel14" childLayout="horizontal" width="100%" style="nifty-panel-simple" height="50%">
+                        <panel id="GPanel16" childLayout="horizontal" width="33%" style="nifty-panel-simple" height="100%">
+                            <panel id="GPanel19" childLayout="center" width="20%" style="nifty-panel-simple" height="100%">
+								<control name="radioButton" id="GRadioButton3"/>
+                            </panel>
+                            <panel id="GPanel20" childLayout="center" width="80%" style="nifty-panel-simple" height="100%">
+								<control name="label" id="GLabel3" width="100px" text="OpenGL1" height="50px" font="aurulent-sans-16.fnt"/>
+                            </panel>
+                        </panel>
+                        <panel id="GPanel17" childLayout="absolute" width="34%" style="nifty-panel-simple" height="100%"/>
+                        <panel id="GPanel18" childLayout="absolute" width="33%" style="nifty-panel-simple" height="100%"/>
+                    </panel>
+                </panel>
+                <panel id="GPanel2" childLayout="absolute" width="100%" style="nifty-panel-simple" height="12%"/>
+                <panel id="GPanel3" childLayout="absolute" width="100%" style="nifty-panel-simple" height="12%"/>
+                <panel id="GPanel6" childLayout="absolute" width="100%" style="nifty-panel-simple" height="12%"/>
+                <panel id="GPanel7" childLayout="absolute" width="100%" style="nifty-panel-simple" height="12%"/>
+                <panel id="GPanel8" childLayout="absolute" width="100%" style="nifty-panel-simple" height="12%"/>
+                <panel id="GPanel10" childLayout="absolute" width="100%" style="nifty-panel-simple" height="12%"/>
+                <panel id="GPanel12" childLayout="absolute" width="100%" style="nifty-panel-simple" height="16%"/>
+            </panel>
+        </layer>
+    </screen>
+</nifty>

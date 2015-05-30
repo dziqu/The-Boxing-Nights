@@ -1,0 +1,18 @@
+package PakietyPodstawowe.Model.Inne;
+
+import PakietyPodstawowe.Model.Interfejsy.IIO;
+
+public class IO implements IIO {
+
+	@Override
+	public static void drukuj(String wiadomoœæDoWydrukowania) {
+		System.out.print(wiadomoœæDoWydrukowania);
+	}
+
+	@Override
+	public void drukuj(String wiadomoœæDoWydrukowania, boolean czyZnakNowejLinii) {
+		if (czyZnakNowejLinii) System.out.println(wiadomoœæDoWydrukowania);
+		else System.out.print(wiadomoœæDoWydrukowania);
+	}
+
+}

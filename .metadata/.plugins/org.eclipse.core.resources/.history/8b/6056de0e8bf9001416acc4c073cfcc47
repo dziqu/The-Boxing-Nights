@@ -1,0 +1,7 @@
+package Enumy;
+
+public enum EWiersze {
+	
+	// wiersze w pliku ustawieñ wyœwietlania
+
+}

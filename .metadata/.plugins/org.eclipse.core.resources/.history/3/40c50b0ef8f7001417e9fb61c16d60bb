@@ -1,0 +1,75 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Model.Inne;
+
+import Model.Enumy.EBuforSzablonowy;
+import Model.Enumy.EGłębiaKolorów;
+import Model.Enumy.EMultipróbkowanie;
+import Model.Enumy.ERenderery;
+import PakietGłówny.KlasaStartowa;
+import com.jme3.system.AppSettings;
+
+/**
+ *
+ * @author Filip
+ */
+public class Ustawienia {
+    
+    private KlasaStartowa app;
+    private AppSettings ustawienia;
+    
+    public Ustawienia(KlasaStartowa app) {
+        this.app = app;
+        ustawienia = new AppSettings(true);
+    }
+    
+    public AppSettings zwróćInstancjęKlasyAppSettings() {
+        return ustawienia;
+    }
+    
+    public void ustawRenderer(ERenderery rodzajRenderera) {
+        ustawienia.setRenderer(rodzajRenderera.zwróćRenderer());
+    }
+    
+    public void ustawGłębięKolorów(EGłębiaKolorów głębiaKolorów) {
+        ustawienia.setBitsPerPixel(głębiaKolorów.zwróćIlośćBitówNaPiksel());
+    }
+    
+    public void ustawIlośćKlatek(Integer ilośćKlatek) {
+        ustawienia.setFrameRate(ilośćKlatek);
+    }
+    
+    public void ustawTrybPełnegoEkranu(boolean czyMaByćustawionyTrybPełnegoEkranu) {
+        ustawienia.setFullscreen(czyMaByćustawionyTrybPełnegoEkranu);
+    }
+    
+    public void ustawSzerokość(Integer szerokość) {
+        ustawienia.setWidth(szerokość);
+    }
+    
+    public void ustawWysokość(Integer wysokość) {
+        ustawienia.setHeight(wysokość);
+    }
+    
+    public void ustawRozdzielczość(Integer szerokość, Integer wysokość) {
+        ustawienia.setResolution(szerokość, wysokość);
+    }
+    
+    public void ustawMultipróbkowanie(EMultipróbkowanie multipróbkowanie) {
+        ustawienia.setSamples(multipróbkowanie.zwróćIlośćPróbek());
+    }
+    
+    public void ustawSynchronizacjęPionową(boolean czyUstawićSynchronizacjęPionową) {
+        ustawienia.setVSync(czyUstawićSynchronizacjęPionową);
+    }
+    
+    public void ustawCzęstotliwość(Integer częstotliwość) {
+        ustawienia.setFrequency(częstotliwość);
+    }
+    
+    public void ustawBuforSzablonowy(EBuforSzablonowy buforSzablonowy) {
+        ustawienia.setBitsPerPixel(buforSzablonowy.zwróćLiczbęBitówMatrycy());
+    }
+}

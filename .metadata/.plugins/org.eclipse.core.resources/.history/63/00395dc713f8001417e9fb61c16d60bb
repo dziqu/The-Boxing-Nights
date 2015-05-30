@@ -1,0 +1,17 @@
+package PakietyPodstawowe.Model.Inne;
+
+import PakietyPodstawowe.Model.Interfejsy.IIO;
+
+public class IO implements IIO {
+
+	@Override
+	public <T> void drukuj(T s) {
+		System.out.print(s); 
+	}
+
+	@Override
+	public <T> void drukuj(T... s) {
+		
+	}
+
+}

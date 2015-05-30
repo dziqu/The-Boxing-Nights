@@ -1,0 +1,23 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Model.Enumy;
+
+/**
+ *
+ * @author Filip
+ */
+public enum EBuforSzablonowy {
+    WYŁĄCZ(0), WŁĄCZ(8);
+    
+    private final Integer liczbaBitówMatrycy;
+    
+    private EBuforSzablonowy(Integer liczbaBitówMatrycy) {
+        this.liczbaBitówMatrycy = liczbaBitówMatrycy;
+    }
+    
+    public Integer zwróćLiczbęBitówMatrycy() {
+        return liczbaBitówMatrycy;
+    }
+}

@@ -1,0 +1,102 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Kontroler;
+
+import Model.ModelMenuGłównego;
+import Model.ModelMenuNowejGry;
+import Widok.WidokMenuGłównego;
+import Widok.WidokMenuNowejGry;
+import com.jme3.app.Application;
+import com.jme3.app.SimpleApplication;
+import com.jme3.app.state.AbstractAppState;
+import com.jme3.app.state.AppStateManager;
+import com.jme3.asset.AssetManager;
+import com.jme3.audio.AudioRenderer;
+import com.jme3.input.InputManager;
+import com.jme3.renderer.ViewPort;
+import de.lessvoid.nifty.Nifty;
+import de.lessvoid.nifty.screen.Screen;
+import de.lessvoid.nifty.screen.ScreenController;
+
+/**
+ *
+ * @author Filip
+ */
+public class KontrolerMenuGłównego extends AbstractAppState implements ScreenController {
+    
+    private final WidokMenuGłównego widokMenuGłównego;
+    private final ModelMenuGłównego modelMenuGłównego;
+    private SimpleApplication app;
+    private ViewPort viewPort;
+    private AssetManager assetManager;
+    private InputManager inputManager;
+    private AudioRenderer audioRenderer;
+    private ViewPort guiViewPort;
+    private AppStateManager stateManager;
+    private Nifty nifty;
+    private Screen screen;
+    
+     public KontrolerMenuGłównego(WidokMenuGłównego widokMenuGłównego, ModelMenuGłównego modelMenuGłównego, Application app) {
+        this.widokMenuGłównego = widokMenuGłównego;
+        this.modelMenuGłównego = modelMenuGłównego;
+        
+        this.app = (SimpleApplication) app;
+        this.viewPort = this.app.getViewPort();
+        this.assetManager = this.app.getAssetManager();
+        this.inputManager = this.app.getInputManager();
+        this.audioRenderer = this.app.getAudioRenderer();
+        this.guiViewPort = this.app.getGuiViewPort();
+        this.stateManager = this.app.getStateManager();
+    }
+
+    public void wyświetlMenuGłówne() {
+        if (nifty != null) {
+            nifty.exit();
+        }
+        widokMenuGłównego.inicjujObiekty(this.app);
+        widokMenuGłównego.wyświetlMenuGłówne(this);
+    }
+    
+    public void nowaGra() {
+        ModelMenuNowejGry modelMenuNowejGry = new ModelMenuNowejGry();
+        WidokMenuNowejGry widokMenuNowejGry = new WidokMenuNowejGry();
+        KontrolerMenuNowejGry kontrolerMenuNowejGry = new KontrolerMenuNowejGry(widokMenuNowejGry, modelMenuNowejGry, app);
+        kontrolerMenuNowejGry.nowaGra();
+        if (nifty != null) {
+            nifty.exit();
+        }
+    }
+    
+    public void wczytajGrę() {
+        
+    }
+    
+    public void multiplayer() {
+        
+    }
+    
+    public void ustawienia() {
+        
+    }
+    
+    public void oGrze() {
+        
+    }
+    
+    public void wyjdź() {
+        System.exit(1);
+    }
+
+    public void bind(Nifty nifty, Screen screen) {
+        this.nifty = nifty;
+        this.screen = screen;
+    }
+
+    public void onStartScreen() {
+    }
+
+    public void onEndScreen() {
+    }
+}

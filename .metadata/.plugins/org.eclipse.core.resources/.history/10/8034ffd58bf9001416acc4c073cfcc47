@@ -1,0 +1,23 @@
+package TestyJednostkowe;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+import Inne.Porównania;
+
+public class ComparatorTest {
+
+	@Test
+	public void porównajStringiTest() { 
+		Integer stringiS¹Równe = 0;
+		Integer otrzymanyRezultat = Porównania.porównaj("aab", "aab");
+		assertEquals(stringiS¹Równe, otrzymanyRezultat);
+	}
+	
+	@Test
+	public void porównajLiczyCa³kowiteTest() {
+		Integer liczbyS¹Równe = 0;
+		Integer otrzymanyRezultat = Porównania.porównaj(10, 10);
+		assertEquals(liczbyS¹Równe, otrzymanyRezultat);
+	}
+}

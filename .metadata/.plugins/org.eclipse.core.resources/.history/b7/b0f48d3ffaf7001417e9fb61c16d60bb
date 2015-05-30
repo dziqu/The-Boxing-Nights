@@ -1,0 +1,5 @@
+package PakietyPodstawowe.Model.Enumy;
+
+public enum EMultipróbkowanie {
+
+}

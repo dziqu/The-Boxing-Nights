@@ -1,0 +1,15 @@
+package TestyJednostkowe;
+
+import org.junit.Test;
+
+import static PakietyPodstawowe.Model.Interfejsy.IIO.*;
+
+public class IOTest {
+
+	@Test
+	public void drukujTest() {
+		drukuj("Siema");
+		drukuj("Siema");
+	}
+
+}

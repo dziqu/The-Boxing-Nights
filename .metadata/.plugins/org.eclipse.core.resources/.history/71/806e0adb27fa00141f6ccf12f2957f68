@@ -1,0 +1,31 @@
+package Enumy;
+
+public enum EWiersze {
+	
+	// numery wierszów w pliku ustawieñ
+	LICZBA_URUCHOMIEÑ_PROGRAMU(0),
+	
+	GRACZ_1_PRZÓD(1),
+	GRACZ_1_TY£(2),
+	GRACZ_1_LEWO(3),
+	GRACZ_1_PRAWO(4),
+	GRACZ_1_LEWA_GÓRA(5),
+	GRACZ_1_LEWA_DÓ£(6),
+	GRACZ_1_PRAWA_GÓRA(7),
+	GRACZ_1_PRAWA_DÓ£(8),
+	GRACZ_1_LEWY_PROSTY(9),
+	GRACZ_1_PRAWY_PROSTY(10),
+	GRACZ_1_LEWY_SIERPOWY(11),
+	GRACZ_1_PRAWY_SIERPOWY(12),
+	GRACZ_1_LEWY_HAK(13),
+	GRACZ_1_PRAWY_HAK(14);
+	
+	
+	private final Integer numerWiersza;
+	
+	private EWiersze(Integer numerWiersza) { 
+		this.numerWiersza = numerWiersza;
+	}
+	
+	public Integer zwróæNumerWiersza() { return numerWiersza; }
+}

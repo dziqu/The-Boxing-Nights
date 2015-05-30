@@ -1,0 +1,5 @@
+package PakietyPodstawowe.Model.Inne;
+
+public class IO implements IIO {
+
+}

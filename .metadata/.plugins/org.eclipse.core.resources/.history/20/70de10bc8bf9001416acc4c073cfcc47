@@ -1,0 +1,18 @@
+package Enumy;
+
+public enum EWiersze {
+	
+	// wiersze w pliku ustawieñ wyœwietlania
+	W£¥CZYÆ_EKRAN_DIALOGOWY(1), 
+	RENDERER(W£¥CZYÆ_EKRAN_DIALOGOWY.zwróæNumerWiersza() + 1), 
+	G£ÊBIA_KOLORÓW(RENDERER.zwróæNumerWiersza() + 1), ILOŒÆ_KLATEK(4), W£¥CZYÆ_TRYB_PE£NEGO_EKRANU(5),
+	SZEROKOŒÆ(6);
+	
+	private final Integer numerWiersza;
+	
+	private EWiersze(Integer numerWiersza) { 
+		this.numerWiersza = numerWiersza;
+	}
+	
+	public Integer zwróæNumerWiersza() { return numerWiersza; }
+}

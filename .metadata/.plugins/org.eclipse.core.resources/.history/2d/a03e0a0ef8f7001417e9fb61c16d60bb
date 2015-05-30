@@ -1,0 +1,140 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Model.Inne;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.apache.commons.io.FileUtils;
+
+/**
+ *
+ * @author Filip
+ */
+public class OperacjeNaPlikach {
+
+    FileUtils fileUtilsInstance;
+
+    public OperacjeNaPlikach() {
+        fileUtilsInstance = new FileUtils();
+    }
+
+    /**
+     * Kopiuje plik do nowej lokalizacji zachowując datę pliku.
+     *
+     * @param plikŹródłowy plik źródłowy
+     * @param plikDocelowy plik docelowy
+     */
+    public void kopiujPlik(File plikŹródłowy, File plikDocelowy) {
+        try {
+            FileUtils.copyFile(plikŹródłowy, plikDocelowy);
+        } catch (IOException ex) {
+            Logger.getLogger(OperacjeNaPlikach.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    /**
+     * Kopiuje plik do podanego katalogu zachowując datę.
+     *
+     * @param plikŹródłowy
+     * @param plikDocelowy
+     */
+    public void kopiujPlikDoKatalogu(File plikŹródłowy, File plikDocelowy) {
+        try {
+            FileUtils.copyFileToDirectory(plikŹródłowy, plikDocelowy);
+        } catch (IOException ex) {
+            Logger.getLogger(OperacjeNaPlikach.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    /**
+     * Usuwa katalog rekurencyjnie.
+     *
+     * @param katalogDoUsunięcia katalog do usunięcia
+     */
+    public void usuńKatalog(File katalogDoUsunięcia) {
+        try {
+            FileUtils.deleteDirectory(katalogDoUsunięcia);
+        } catch (IOException ex) {
+            Logger.getLogger(OperacjeNaPlikach.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    /**
+     * Usuwa plik bez rzucania wyjątku.
+     *
+     * @param plikDoUsunięcia plik do usunięcia
+     */
+    public void usuńPlikBezRzucaniaWyjątku(File plikDoUsunięcia) {
+        FileUtils.deleteQuietly(plikDoUsunięcia);
+    }
+
+    /**
+     * Usuwa plik.
+     *
+     * @param plikDoUsunięcia plik do usunięcia
+     */
+    public void usuńPlik(File plikDoUsunięcia) {
+        try {
+            FileUtils.forceDelete(plikDoUsunięcia);
+        } catch (IOException ex) {
+            Logger.getLogger(OperacjeNaPlikach.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    /**
+     * Czyta dane z pliku.
+     *
+     * @param plikDoOdczytania plik do odczytania
+     * @return lista przechowująca dane pobrane z pliku
+     */
+    public List<String> czytajLinieZPliku(File plikDoOdczytania) {
+        List<String> listaPrzechowującaDanePobraneZPliku = new ArrayList<String>();
+        try {
+            listaPrzechowującaDanePobraneZPliku = FileUtils.readLines(plikDoOdczytania);
+        } catch (IOException ex) {
+            Logger.getLogger(OperacjeNaPlikach.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listaPrzechowującaDanePobraneZPliku;
+    }
+
+    /**
+     * Zapisuje dane do pliku.
+     *
+     * @param plikDoZapisu plik do zapisu
+     * @param listaDanychDoZapisu lista danych do zapisu
+     */
+    public void zapiszDoPliku(File plikDoZapisu, List<String> listaDanychDoZapisu) {
+        try {
+            FileUtils.writeLines(plikDoZapisu, listaDanychDoZapisu);
+        } catch (IOException ex) {
+            Logger.getLogger(OperacjeNaPlikach.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    /**
+     * Tworzy nowy folder
+     * @param lokalizacjaFolderuDoStworzenia lokalizacja folderu do stworzenia
+     */
+    public void stwórzFolder(String lokalizacjaFolderuDoStworzenia) {
+        try {
+            File folderDoStworzenia = new File(lokalizacjaFolderuDoStworzenia);
+            folderDoStworzenia.mkdir();
+        } catch (Exception ex) {
+        }
+    }
+    
+    public void stwórzPlik(String lokalizacjaPlikuDoUtworzenia) {
+        try {
+            File plikDoStworzenia = new File(lokalizacjaPlikuDoUtworzenia);
+            plikDoStworzenia.createNewFile();
+        } catch (Exception ex) {
+            
+        }
+    }
+}

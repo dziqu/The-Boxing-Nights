@@ -1,0 +1,17 @@
+package PakietyPodstawowe.Model.Enumy;
+
+public enum EMultipróbkowanie {
+	
+	WY£¥CZ(0), PRÓBEK_1(1), PRÓBEK_2(2), PRÓBEK_4(4), PRÓBEK_8(8), PRÓBEK_16(16), PRÓBEK_32(32);
+    
+    private final Integer iloœæPróbek;
+    
+    private EMultipróbkowanie(Integer iloœæPróbek) {
+        this.iloœæPróbek = iloœæPróbek;
+    }
+    
+    public Integer zwróæIloœæPróbek() {
+        return iloœæPróbek;
+    }
+
+}

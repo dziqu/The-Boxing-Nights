@@ -1,0 +1,50 @@
+package Interfejsy;
+
+import Enumy.EBuforSzablonowy;
+import Enumy.EG³êbiaKolorów;
+import Enumy.EMultipróbkowanie;
+import Enumy.ERenderery;
+
+import com.jme3.system.AppSettings;
+
+/**
+ * Implementuje metody ustawieñ.
+ * @author Filip Ho³ówko
+ */
+public interface IUstawienia {
+	
+	/**
+	 * Ustawia instancjê klasy AppSettings.
+	 * @param ustawienia instancja klasy AppSettings
+	 */
+	public void ustawInstancjêKlasyAppSettings(AppSettings ustawienia);
+	
+	/**
+	 * Zwraca instancjê klasy AppSettings.
+	 * @return instancja klasy AppSettings
+	 */
+	public AppSettings zwróæInstancjêKlasyAppSettings();
+	
+	public void ustawRenderer(ERenderery rodzajRenderera);
+	
+	public void ustawG³êbiêKolorów(EG³êbiaKolorów g³êbiaKolorów);
+	
+	public void ustawIloœæKlatek(Integer iloœæKlatek);
+	
+	public void ustawTrybPe³negoEkranu(Boolean czyUstawiæTrybPe³negoEkranu);
+	
+	public void ustawSzerokoœæ(Integer szerokoœæ);
+	
+	public void ustawWysokoœæ(Integer wysokoœæ);
+	
+	public void ustawRodzielczoœæ(Integer szerokoœæ, Integer wysokoœæ);
+	
+	public void ustawMultipróbkowanie(EMultipróbkowanie multipróbkownie);
+	
+	public void ustawSynchronizacjêPionow¹(Boolean czyUstawiæSynchronizacjêPionow¹);
+	
+	public void ustawCzêstotliwoœæ(Integer czêstotliwoœæ);
+	
+	public void ustawBuforSzablonowy(EBuforSzablonowy buforSzablonowy);
+
+}

@@ -1,0 +1,22 @@
+package PakietyPodstawowe.Model;
+
+import com.jme3.app.SimpleApplication;
+import com.jme3.app.state.AbstractAppState;
+import com.jme3.app.state.AppStateManager;
+import com.jme3.asset.AssetManager;
+import com.jme3.audio.AudioRenderer;
+import com.jme3.input.InputManager;
+import com.jme3.renderer.ViewPort;
+
+import de.lessvoid.nifty.Nifty;
+
+public class ModelUstawieñWyœwietlania extends AbstractAppState {
+	private SimpleApplication app;
+    private ViewPort viewPort;
+    private AssetManager assetManager;
+    private InputManager inputManager;
+    private AudioRenderer audioRenderer;
+    private ViewPort guiViewPort;
+    private AppStateManager stateManager;
+    private Nifty nifty;
+}

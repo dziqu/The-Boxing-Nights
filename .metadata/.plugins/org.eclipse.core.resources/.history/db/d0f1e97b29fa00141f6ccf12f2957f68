@@ -1,0 +1,18 @@
+package Enumy;
+
+public enum EZnakiSpecjalne {
+	
+	PUSTY_STRING(""), NOWA_LINIA("\n"), POWRÓT_KARETKI	("\r"), 
+	CUDZYS£ÓW	("\""), APOSTROF("\'"), BACKSLASH		("\\");
+	
+	private final String znak;
+	
+	private EZnakiSpecjalne(String znak) {
+		this.znak = znak;
+	}
+	
+	public String zwróæZnak() {
+		return znak;
+	}
+
+}

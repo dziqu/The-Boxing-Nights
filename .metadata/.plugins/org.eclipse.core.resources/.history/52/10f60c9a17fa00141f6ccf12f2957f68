@@ -1,0 +1,5 @@
+package Enumy;
+
+public enum ESterowanieGracza1 {
+
+}

@@ -1,0 +1,27 @@
+package TestyJednostkowe;
+
+import org.junit.Test;
+
+import static PakietyPodstawowe.Model.Interfejsy.IIO.*;
+
+public class IOTest {
+
+	@Test
+	public void drukujTest() {
+		drukuj("Witaj");
+		drukuj("Witaj");
+	}
+	
+	@Test
+	public void drukujZNow¹Lini¹() {
+		drukujL("Hej");
+		drukujL("Hej");
+	}
+	
+	@Test
+	public void drukujDoPliku() {
+		File plik = new File("test/test.txt");
+		drukujP("Witaj");
+	}
+
+}

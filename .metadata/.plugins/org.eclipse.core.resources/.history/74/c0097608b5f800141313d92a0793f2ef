@@ -1,0 +1,5 @@
+package PakietyPodstawowe.Model.Interfejsy;
+
+public interface IIO {
+
+}

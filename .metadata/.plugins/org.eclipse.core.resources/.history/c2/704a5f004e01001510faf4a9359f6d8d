@@ -1,0 +1,61 @@
+package PakietyPodstawowe.Model;
+
+import Enumy.ENazwy;
+import PakietyPodstawowe.Kontroler.KontrolerMenuG³ównego;
+
+import com.jme3.app.Application;
+import com.jme3.app.SimpleApplication;
+import com.jme3.app.state.AbstractAppState;
+import com.jme3.app.state.AppStateManager;
+import com.jme3.asset.AssetManager;
+import com.jme3.audio.AudioRenderer;
+import com.jme3.input.InputManager;
+import com.jme3.niftygui.NiftyJmeDisplay;
+import com.jme3.renderer.ViewPort;
+
+import de.lessvoid.nifty.Nifty;
+import de.lessvoid.nifty.screen.Screen;
+
+/**
+ *
+ * @author Filip
+ */
+public class ModelMenuG³ównego extends AbstractAppState {
+
+    private SimpleApplication app;
+    private ViewPort viewPort;
+    private AssetManager assetManager;
+    private InputManager inputManager;
+    private AudioRenderer audioRenderer;
+    private ViewPort guiViewPort;
+    private AppStateManager stateManager;
+    private Nifty nifty;
+    private Screen screen;
+
+    public void inicjujObiekty(Application app) {
+        this.app = (SimpleApplication) app;
+        this.viewPort = this.app.getViewPort();
+        this.assetManager = this.app.getAssetManager();
+        this.inputManager = this.app.getInputManager();
+        this.audioRenderer = this.app.getAudioRenderer();
+        this.guiViewPort = this.app.getGuiViewPort();
+        this.stateManager = this.app.getStateManager();
+    }
+
+    public void wyœwietlMenuG³ówne(KontrolerMenuG³ównego kontrolerMenuG³ównego) {
+        NiftyJmeDisplay niftyDisplay = new NiftyJmeDisplay(assetManager, inputManager, audioRenderer, viewPort);
+        nifty = niftyDisplay.getNifty();
+
+        nifty.fromXml(ENazwy.ŒCIE¯KA_DO_WIDOKU_MENU_G£ÓWNEGO.zwróæLokalizacjê(), "menuG³ówne", kontrolerMenuG³ównego);
+        stateManager.attach(kontrolerMenuG³ównego);
+        guiViewPort.addProcessor(niftyDisplay);
+    }
+
+	public Screen getScreen() {
+		return screen;
+	}
+
+	public void setScreen(Screen screen) {
+		this.screen = screen;
+	}
+}

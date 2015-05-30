@@ -1,0 +1,17 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Model.Inne;
+
+/**
+ *
+ * @author Filip
+ */
+public class Porównania {
+    
+    public static <T> boolean jestRówny(T element1, T element2) {
+        return element1.equals(element2);
+    }
+    
+}

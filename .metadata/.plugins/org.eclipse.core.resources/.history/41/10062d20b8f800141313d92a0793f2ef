@@ -1,0 +1,11 @@
+package Interfejsy;
+
+import com.jme3.system.AppSettings;
+
+public interface IUstawienia {
+	
+	public AppSettings zwróæInstancjêKlasyAppSettings();
+	
+	public void ustawRenderer(ERenderery rodzajRenderera);
+
+}

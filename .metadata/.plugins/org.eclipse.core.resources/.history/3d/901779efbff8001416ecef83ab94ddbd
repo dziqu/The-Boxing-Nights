@@ -1,0 +1,31 @@
+package PakietyPodstawowe.Start;
+
+import PakietyPodstawowe.Kontroler.KontrolerMenuG³ównego;
+import PakietyPodstawowe.Widok.WidokMenuG³ównego;
+import com.jme3.app.SimpleApplication;
+
+/**
+ * Klasa uruchamiaj¹ca program. Tworzy pliki i foldery je¿eli ich nie ma oraz
+ * inicjuje dane pocz¹tkowe.
+ */
+public final class KlasaStartowa extends SimpleApplication {
+
+    public static void main(String[] args) {
+        app.setShowSettings(false);
+        app.start();
+    }
+
+    @Override
+    public void simpleInitApp() {
+
+        WidokMenuG³ównego widokMenuG³ównego = new WidokMenuG³ównego();
+        KontrolerMenuG³ównego kontrolerMenuG³ównego = new KontrolerMenuG³ównego(widokMenuG³ównego, null, this);
+        kontrolerMenuG³ównego.wyœwietlMenuG³ówne();
+
+        ustawWidocznoœæKursora(true);
+    }
+
+    public void ustawWidocznoœæKursora(boolean czyKursorMaByæWidoczny) {
+        flyCam.setDragToRotate(czyKursorMaByæWidoczny);
+    }
+}

@@ -1,0 +1,23 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Model.Enumy;
+
+/**
+ *
+ * @author Filip
+ */
+public enum EMultipróbkowanie {
+    WYŁĄCZ(0), PRÓBEK_1(1), PRÓBEK_2(2), PRÓBEK_4(4), PRÓBEK_8(8), PRÓBEK_16(16), PRÓBEK_32(32);
+    
+    private final Integer ilośćPróbek;
+    
+    private EMultipróbkowanie(Integer ilośćPróbek) {
+        this.ilośćPróbek = ilośćPróbek;
+    }
+    
+    public Integer zwróćIlośćPróbek() {
+        return ilośćPróbek;
+    }
+}

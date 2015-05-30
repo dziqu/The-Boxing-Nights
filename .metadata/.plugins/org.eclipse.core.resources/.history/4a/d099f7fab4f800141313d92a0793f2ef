@@ -1,0 +1,15 @@
+package PakietyPodstawowe.Model.Enumy;
+
+public enum EBuforSzablonowy {
+	WY£¥CZ(0), W£¥CZ(8);
+    
+    private final Integer liczbaBitówMatrycy;
+    
+    private EBuforSzablonowy(Integer liczbaBitówMatrycy) {
+        this.liczbaBitówMatrycy = liczbaBitówMatrycy;
+    }
+    
+    public Integer zwróæLiczbêBitówMatrycy() {
+        return liczbaBitówMatrycy;
+    }
+}

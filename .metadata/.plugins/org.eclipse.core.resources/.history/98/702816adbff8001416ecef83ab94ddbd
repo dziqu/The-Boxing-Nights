@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<nifty>
+    <useControls filename="nifty-default-controls.xml"/>
+    <useStyles filename="nifty-default-styles.xml"/>
+    <screen id="menuGłówne" controller="Kontroler.KontrolerMenuGłównego">
+        <layer id="GLayer0" childLayout="center">
+            <panel id="GPanel3" childLayout="center" width="100%" x="258" y="107" style="nifty-panel-simple" height="100%">
+                <panel id="GPanel5" childLayout="vertical" width="393px" style="nifty-panel-simple" height="525px">
+                    <panel id="GPanel6" childLayout="center" width="100%" x="153" y="119" style="nifty-panel-simple" height="16.6%">
+                        <control name="button" id="GButton3" childLayout="center" width="50%" label="Nowa gra" height="40%">
+                            <interact onClick="nowaGra()"/>
+                        </control>
+                    </panel>
+                    <panel id="GPanel8" childLayout="center" width="100%" style="nifty-panel-simple" height="16.6%">
+                        <control name="button" id="GButton4" childLayout="center" width="50%" label="Wczytaj grę" height="40%">
+                            <interact onClick="wczytajGrę()"/>
+                        </control>
+                    </panel>
+                    <panel id="GPanel9" childLayout="center" width="100%" style="nifty-panel-simple" height="16.6%">
+                        <control name="button" id="GButton5" childLayout="center" width="50%" label="Multiplayer" height="40%">
+                            <interact onClick="multiplayer()"/>
+                        </control>
+                    </panel>
+                    <panel id="GPanel9" childLayout="center" width="100%" style="nifty-panel-simple" height="16.6%">
+                        <control name="button" id="GButton6" childLayout="center" width="50%" label="Ustawienia" height="40%">
+                            <interact onClick="ustawienia()"/>
+                        </control>
+                    </panel>
+                    <panel id="GPanel10" childLayout="center" width="100%" style="nifty-panel-simple" height="16.6%">
+                        <control name="button" id="GButton7" childLayout="center" width="50%" label="O grze" height="40%">
+                            <interact onClick="oGrze()"/>
+                        </control>
+                    </panel>
+                    <panel id="GPanel11" childLayout="center" width="100%" style="nifty-panel-simple" height="16.6%">
+                        <control name="button" id="GButton8" childLayout="center" width="50%" label="Wyjście" height="40%">
+                            <interact onClick="wyjście()"/>
+                        </control>
+                    </panel>
+                </panel>
+            </panel>
+        </layer>
+    </screen>
+</nifty>

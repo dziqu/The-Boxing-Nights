@@ -1,0 +1,13 @@
+package TestyJednostkowe;
+
+import org.junit.Test;
+import static PakietyPodstawowe.Model.Inne.IO.*;
+
+public class IOTest implements IIO {
+
+	@Test
+	public void drukujTest() {
+		
+	}
+
+}

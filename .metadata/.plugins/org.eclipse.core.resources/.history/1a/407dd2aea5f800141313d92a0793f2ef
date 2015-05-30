@@ -1,0 +1,13 @@
+package PakietyPodstawowe.Model.Enumy;
+
+public enum EZnakiSpecjalne {
+	
+	PUSTY_STRING(""), NOWA_LINIA("\n");
+	
+	private final String znak;
+	
+	private EZnakiSpecjalne(String znak) {
+		this.znak = znak;
+	}
+
+}

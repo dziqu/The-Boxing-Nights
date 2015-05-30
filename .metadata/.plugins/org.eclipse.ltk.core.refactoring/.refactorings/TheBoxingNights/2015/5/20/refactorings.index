@@ -1,0 +1,62 @@
+1431359551134	Delete element
+1431359561576	Copy files
+1431359683903	Delete element
+1431359934527	Move compilation units
+1431360548874	Delete element
+1431367519957	Rename method 'drukujP'
+1431368793680	Infer generic type arguments
+1431441691773	Move compilation units
+1431441698576	Delete element
+1431441714318	Move compilation unit
+1431441719893	Delete element
+1431441744046	Move compilation units
+1431441751360	Delete element
+1431441784765	Move compilation unit
+1431441787819	Delete element
+1431441802678	Move compilation units
+1431441805591	Delete element
+1431441816552	Move compilation units
+1431441819768	Delete element
+1431442284696	Encapsulate field 'modelMenuGłównego'
+1431442292936	Encapsulate field 'viewPort'
+1431442298044	Encapsulate field 'assetManager'
+1431442302926	Encapsulate field 'inputManager'
+1431442307175	Encapsulate field 'audioRenderer'
+1431442311901	Encapsulate field 'guiViewPort'
+1431442316050	Encapsulate field 'stateManager'
+1431442320283	Encapsulate field 'screen'
+1431442954178	Rename type 'IUstawieni'
+1431443664950	Encapsulate field 'ustawienia'
+1431445537495	Encapsulate field 'screen'
+1431524889007	Rename type 'ELokalizacje'
+1431527138955	Rename enum constant 'ZAPISANE_USTAWIENIA_WYŚWIETLANIA'
+1431527252065	Rename enum constant 'FOLDER_USTAWIEN'
+1431527273605	Rename enum constant 'PLIK_USTAWIEN_WYSWIETLANIA'
+1431531570801	Rename local variable 'oczekiwanyRezultat'
+1431539303505	Rename method 'plikIstnieje'
+1431585564934	Rename local variable 'wybranyTrybWyświetlania'
+1431585572063	Rename local variable 'trybWyświetlani'
+1431585699649	Rename method 'ustawRodzielczość'
+1431585899225	Rename local variable 'pobranaLiczbaUruchomieńProgramuWynosiJeden'
+1431585940606	Rename type 'ELokalizacjeINazwy'
+1431586708256	Rename enum constant 'PLIK_USTAWIEŃ_WYSWIETLANIA'
+1431586727714	Rename enum constant 'PLIK_USTAWIEŃ_GRY'
+1431591034867	Rename field 'ustawienia'
+1431591109989	Rename method 'zwróćInstancjęKlasyAppSettings'
+1431591124631	Rename method 'ustawInstancjęKlasyAppSettings'
+1431593478152	Rename type 'Ustawienia'
+1431593496801	Rename type 'IUstawienia'
+1431593771510	Rename type 'ESterowanie'
+1431594077761	Delete element
+1431594567845	Rename type 'Sterowanie'
+1431596886393	Infer generic type arguments
+1431598036268	Rename type 'SterowanieGraczem1'
+1431599398242	Rename field 'ustawieniaDomyślne'
+1431599427069	Rename method 'zwróćUstawieniaDomyślne'
+1431603775877	Rename type 'EZnakiSpecjalne'
+1431609151615	Rename local variable 'ustawienia'
+1431609159403	Rename local variable 'ustawieniaWyświetlani'
+1431708465893	Rename method 'inkrementujLiczbęUruchomieńProgramu'
+1431713292968	Rename local variable 'listaUstawień'
+1431713337662	Rename method 'inicjzujPlikUstawień'
+1431713755394	Infer generic type arguments

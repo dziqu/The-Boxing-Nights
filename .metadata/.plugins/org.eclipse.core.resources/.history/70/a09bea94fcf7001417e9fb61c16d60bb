@@ -1,0 +1,12 @@
+package TestyJednostkowe;
+
+import org.junit.Test;
+
+public class IOTest {
+
+	@Test
+	public void drukujTest() {
+		
+	}
+
+}

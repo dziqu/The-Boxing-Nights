@@ -1,0 +1,21 @@
+package TestyJednostkowe;
+
+import org.junit.Test;
+
+import PakietyPodstawowe.Model.Interfejsy.IIO;
+import static PakietyPodstawowe.Model.Inne.IO.*;
+
+public class IOTest implements IIO {
+
+	@Test
+	public void drukujTest() {
+		drukuj("Siema");
+	}
+
+	@Override
+	public void drukuj(String wiadomoœæDoWydrukowania, boolean czyZnakNowejLinii) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

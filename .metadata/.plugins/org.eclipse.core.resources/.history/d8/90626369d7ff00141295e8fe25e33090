@@ -1,0 +1,172 @@
+package PakietyPodstawowe.Start;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.lwjgl.opengl.GLContext;
+
+import Enumy.ENazwy;
+import Enumy.EWiersze;
+import Inne.IO;
+import Inne.Porównania;
+import Inne.UstawieniaWyświetlania;
+import PakietyPodstawowe.Kontroler.KontrolerMenuGłównego;
+import PakietyPodstawowe.Widok.WidokMenuGłównego;
+
+import com.jme3.app.SimpleApplication;
+
+/**
+ * Klasa uruchamiająca program. Tworzy pliki i foldery jeżeli ich nie ma oraz
+ * inicjuje dane początkowe.
+ */
+public final class KlasaStartowa extends SimpleApplication {
+	
+	private UstawieniaWyświetlania ustawieniaWyświetlania;
+	private static KlasaStartowa app;
+	private static List <String> listaDanych = null;
+	private static int liczbaUruchomieńProgramu = 0;
+
+    public static void main(String[] args) {
+        app = new KlasaStartowa();
+        app.ustawieniaWyświetlania = new UstawieniaWyświetlania(app);
+        
+        
+        Boolean plikUstawieńIstnieje = sprawdźCzyPlikUstawieńIstnieje();
+        if (!plikUstawieńIstnieje) stwórzPlikUstawień();
+        
+        listaDanych = pobierzListęDanychZPlikuUstawień();
+        
+        int rozmiarListyDanych =  listaDanych.size();
+        Boolean rozmiarListyDanychJestRównyZero = Porównania.porównaj(rozmiarListyDanych, 0) == 0;
+        if (rozmiarListyDanychJestRównyZero) inicjujPierwszyElementListyDanychWartościąZero();
+        
+        liczbaUruchomieńProgramu = pobierzZListyDanychLiczbęUruchomieńProgramu();
+        inkrementujLiczbęUruchomieńProgramu();
+        ustawLiczbęUruchomieńProgramuWLiścieDanych();
+        Boolean programZostałUruchomionyPierwszyRaz = Porównania.porównaj(liczbaUruchomieńProgramu, 1) == 0;
+        if(programZostałUruchomionyPierwszyRaz) {
+        	app.inicjujDomyślneUstawieniaWyświetlania();
+        	app.zapiszDomyślneUstawieniaWyświetlaniaWPlikuUstawieńDomyślnych();
+        	app.zapiszDomyślneUstawieniaWyświetlaniaWPlikuUstawieńTymczasowych();
+        	dopiszDoListyDanychUstawieniaDomyślneSterowania();
+        }
+        
+        zapiszListęDanychWPlikuUstawień();
+        app.wczytajAktualneUstawieniaWyświetlania();
+        app.ustawUstawieniaWyświetlania();
+        wyłączEkranUstawień();
+        
+        app.start();
+    }
+    
+    @Override
+    public void simpleInitApp() {
+    	
+        WidokMenuGłównego widokMenuGłównego = new WidokMenuGłównego();
+        KontrolerMenuGłównego kontrolerMenuGłównego = new KontrolerMenuGłównego(widokMenuGłównego, null, this);
+        kontrolerMenuGłównego.wyświetlMenuGłówne();
+
+        ustawWidocznośćKursora(true);
+    }
+    
+    private static Boolean sprawdźCzyPlikUstawieńIstnieje() {
+    	Boolean plikUstawieńIstnieje = IO.istniejePlik(new File(ENazwy.PLIK_PRZECHOWUJĄCY_LICZBĘ_URUCHOMIEŃ_PROGRAMU.zwróćLokalizację()));
+    	return plikUstawieńIstnieje;
+    }
+    
+    private static void stwórzPlikUstawień() {
+    	IO.drukuj(new File(ENazwy.PLIK_PRZECHOWUJĄCY_LICZBĘ_URUCHOMIEŃ_PROGRAMU.zwróćLokalizację()));
+    }
+    
+    private static List <String> pobierzListęDanychZPlikuUstawień() {
+    	return IO.skanuj(new File(ENazwy.PLIK_PRZECHOWUJĄCY_LICZBĘ_URUCHOMIEŃ_PROGRAMU.zwróćLokalizację()));
+    }
+    
+    private static void inicjujPierwszyElementListyDanychWartościąZero() {
+    	listaDanych.add("0");
+    }
+    
+    private static int pobierzZListyDanychLiczbęUruchomieńProgramu() {
+    	return Integer.parseInt(listaDanych.get(EWiersze.LICZBA_URUCHOMIEŃ_PROGRAMU.zwróćNumerWiersza()));
+    }
+    
+    private static void inkrementujLiczbęUruchomieńProgramu() {
+    	liczbaUruchomieńProgramu++;
+    }
+    
+    private static void ustawLiczbęUruchomieńProgramuWLiścieDanych() {
+    	listaDanych.set(EWiersze.LICZBA_URUCHOMIEŃ_PROGRAMU.zwróćNumerWiersza(), String.valueOf(liczbaUruchomieńProgramu));
+    }
+    
+    private void inicjujDomyślneUstawieniaWyświetlania() {
+    	ustawieniaWyświetlania.pobierzUstawieniaDomyślneZSystemu();
+    }
+    
+    private void zapiszDomyślneUstawieniaWyświetlaniaWPlikuUstawieńDomyślnych() {
+    	ustawieniaWyświetlania.zapiszUstawieniaDomyślneWPlikuUstawieńDomyślnych();
+    }
+    
+    private void zapiszDomyślneUstawieniaWyświetlaniaWPlikuUstawieńTymczasowych() {
+    	ustawieniaWyświetlania.zapiszUstawieniaDomyślneWPlikuUstawieńTymczasowych();
+    }
+    
+    private static void dopiszDoListyDanychUstawieniaDomyślneSterowania() {
+    	List <String> listaPrzechowującaDomyślneUstawieniaSterowania = zwróćListęPrzechowującąDomyślneUstawieniaSterowania();
+    	listaDanych = IO.dopisz(listaDanych, listaPrzechowującaDomyślneUstawieniaSterowania);
+    }
+    
+    private static void zapiszListęDanychWPlikuUstawień() {
+    	IO.drukujL(new File (ENazwy.PLIK_PRZECHOWUJĄCY_LICZBĘ_URUCHOMIEŃ_PROGRAMU.zwróćLokalizację()), listaDanych);
+    }
+    
+    private void wczytajAktualneUstawieniaWyświetlania() {
+    	ustawieniaWyświetlania.wczytajUstawieniaZPlikuUstawieńTymczasowych();
+    }
+    
+    private void ustawUstawieniaWyświetlania() {
+    	ustawieniaWyświetlania.ustawUstawieniaWyświetlania();
+    }
+    
+    private static void wyłączEkranUstawień() {
+    	app.setShowSettings(true);
+    }
+    
+    private static List <String> zwróćListęPrzechowującąDomyślneUstawieniaSterowania() {
+    	List <String> lista = new ArrayList<String>();
+    	lista.add(EWiersze.GRACZ_1_PRZÓD.zwróćWartośćDomyślną());
+    	lista.add(EWiersze.GRACZ_1_TYŁ.zwróćWartośćDomyślną());
+    	lista.add(EWiersze.GRACZ_1_LEWO.zwróćWartośćDomyślną());
+    	lista.add(EWiersze.GRACZ_1_PRAWO.zwróćWartośćDomyślną());
+    	lista.add(EWiersze.GRACZ_1_LEWA_GÓRA.zwróćWartośćDomyślną());
+    	lista.add(EWiersze.GRACZ_1_LEWA_DÓŁ.zwróćWartośćDomyślną());
+    	lista.add(EWiersze.GRACZ_1_PRAWA_GÓRA.zwróćWartośćDomyślną());
+    	lista.add(EWiersze.GRACZ_1_PRAWA_DÓŁ.zwróćWartośćDomyślną());
+    	lista.add(EWiersze.GRACZ_1_LEWY_PROSTY.zwróćWartośćDomyślną());
+    	lista.add(EWiersze.GRACZ_1_PRAWY_PROSTY.zwróćWartośćDomyślną());
+    	lista.add(EWiersze.GRACZ_1_LEWY_SIERPOWY.zwróćWartośćDomyślną());
+    	lista.add(EWiersze.GRACZ_1_PRAWY_SIERPOWY.zwróćWartośćDomyślną());
+    	lista.add(EWiersze.GRACZ_1_LEWY_HAK.zwróćWartośćDomyślną());
+    	lista.add(EWiersze.GRACZ_1_PRAWY_HAK.zwróćWartośćDomyślną());
+    	lista.add(EWiersze.GRACZ_2_PRZÓD.zwróćWartośćDomyślną());
+    	lista.add(EWiersze.GRACZ_2_TYŁ.zwróćWartośćDomyślną());
+    	lista.add(EWiersze.GRACZ_2_LEWO.zwróćWartośćDomyślną());
+    	lista.add(EWiersze.GRACZ_2_PRAWO.zwróćWartośćDomyślną());
+    	lista.add(EWiersze.GRACZ_2_LEWA_GÓRA.zwróćWartośćDomyślną());
+    	lista.add(EWiersze.GRACZ_2_LEWA_DÓŁ.zwróćWartośćDomyślną());
+    	lista.add(EWiersze.GRACZ_2_PRAWA_GÓRA.zwróćWartośćDomyślną());
+    	lista.add(EWiersze.GRACZ_2_PRAWA_DÓŁ.zwróćWartośćDomyślną());
+    	lista.add(EWiersze.GRACZ_2_LEWY_PROSTY.zwróćWartośćDomyślną());
+    	lista.add(EWiersze.GRACZ_2_PRAWY_PROSTY.zwróćWartośćDomyślną());
+    	lista.add(EWiersze.GRACZ_2_LEWY_SIERPOWY.zwróćWartośćDomyślną());
+    	lista.add(EWiersze.GRACZ_2_PRAWY_SIERPOWY.zwróćWartośćDomyślną());
+    	lista.add(EWiersze.GRACZ_2_LEWY_HAK.zwróćWartośćDomyślną());
+    	lista.add(EWiersze.GRACZ_2_PRAWY_HAK.zwróćWartośćDomyślną());
+    	
+    	return lista;
+    }
+
+    public void ustawWidocznośćKursora(boolean czyKursorMaByćWidoczny) {
+        flyCam.setDragToRotate(czyKursorMaByćWidoczny);
+    }
+}

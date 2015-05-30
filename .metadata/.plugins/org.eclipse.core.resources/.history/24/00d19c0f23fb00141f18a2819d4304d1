@@ -1,0 +1,36 @@
+package Inne;
+
+import java.io.File;
+import java.math.BigInteger;
+import java.util.List;
+
+import Enumy.ENazwy;
+import Enumy.EWiersze;
+
+public class Iteracje {
+	
+	public static BigInteger inkrementujIZapiszLiczbêUruchomieñProgramu() {
+		List <String> listaDanych = IO.skanuj(new File(ENazwy.PLIK_PRZECHOWUJ¥CY_LICZBÊ_URUCHOMIEÑ_PROGRAMU.zwróæLokalizacjê()));
+		String liczbaStr = "";
+		int rozmiarListyDanych = listaDanych.size();
+		if (Porównania.porównaj(rozmiarListyDanych, 0) != 0) {
+			liczbaStr = listaDanych.get(EWiersze.LICZBA_URUCHOMIEÑ_PROGRAMU.zwróæNumerWiersza());
+		}
+		BigInteger liczba = null;
+		if (!Porównania.regexLiczba(liczbaStr) || Porównania.porównaj(liczbaStr, "") == 0) {
+			liczba = new BigInteger(EWiersze.LICZBA_URUCHOMIEÑ_PROGRAMU.zwróæWartoœæDomyœln¹());
+		}
+		else liczba = new BigInteger(liczbaStr);
+		
+		liczba = liczba.add(BigInteger.valueOf(1));
+		
+		if (Porównania.porównaj(rozmiarListyDanych, 0) != 0) {
+			
+		}
+		IO.edytuj(new File(ENazwy.PLIK_PRZECHOWUJ¥CY_LICZBÊ_URUCHOMIEÑ_PROGRAMU.zwróæLokalizacjê()),
+				EWiersze.LICZBA_URUCHOMIEÑ_PROGRAMU.zwróæNumerWiersza(),
+				String.valueOf(liczba));
+		return liczba;
+	}
+
+}

@@ -1,0 +1,7 @@
+package PakietyPodstawowe.Model.Interfejsy;
+
+public interface IIO {
+	
+	public void drukuj(String wiadomoœæDoWydrukowania);
+
+}

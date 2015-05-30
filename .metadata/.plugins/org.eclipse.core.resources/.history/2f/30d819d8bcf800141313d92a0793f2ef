@@ -1,0 +1,103 @@
+package Inne;
+
+import Enumy.EBuforSzablonowy;
+import Enumy.EG³êbiaKolorów;
+import Enumy.EMultipróbkowanie;
+import Enumy.ERenderery;
+import Interfejsy.IUstawienia;
+
+import com.jme3.system.AppSettings;
+
+/**
+ * Klasa ustawia ustawienia wyœwietlania.
+ */
+public class Ustawienia implements IUstawienia {
+	
+	private AppSettings ustawienia;
+	
+	/**
+	 * Konstruktor domyœlny.
+	 */
+	public Ustawienia() { ustawInstancjêKlasyAppSettings(new AppSettings(true)); }
+	
+	/**
+	 * Ustawia instancjê klasy AppSettings.
+	 * @param ustawienia instancja klasy AppSettings
+	 */
+	@Override
+	public void ustawInstancjêKlasyAppSettings(AppSettings ustawienia) {
+		this.ustawienia = ustawienia;
+	}
+	
+	/**
+	 * Zwraca instancjê klasy AppSettings.
+	 * @return instancja klasy AppSettings
+	 */
+	@Override
+	public AppSettings zwróæInstancjêKlasyAppSettings() { return ustawienia; }
+	
+	/**
+	 * Ustawia renderer.
+	 * @param rodzajRenderera rodzaj renderera
+	 */
+	@Override
+	public void ustawRenderer(ERenderery rodzajRenderera) { 
+		zwróæInstancjêKlasyAppSettings().setRenderer(rodzajRenderera.zwróæRenderer()); }
+	
+	/**
+	 * Ustawia g³êbiê kolorów.
+	 * @param g³êbiaKolorów g³êbiaKolorów
+	 */
+	@Override
+	public void ustawG³êbiêKolorów(EG³êbiaKolorów g³êbiaKolorów) { 
+		zwróæInstancjêKlasyAppSettings().setBitsPerPixel(g³êbiaKolorów.zwróæIloœæBitówNaPiksel()); }
+	
+	/**
+	 * Ustawia iloœæ klatek.
+	 * @param iloœæKlatek iloœæ klatek
+	 */
+	@Override
+	public void ustawIloœæKlatek(Integer iloœæKlatek) {
+		zwróæInstancjêKlasyAppSettings().setFrameRate(iloœæKlatek); }
+	
+	/**
+	 * Ustawia tryb pe³nego ekranu.
+	 * @param czyUstawiæTrybPe³negoEkranu czy ustawiæ tryb pe³nego ektanu
+	 */
+	@Override
+	public void ustawTrybPe³negoEkranu(Boolean czyUstawiæTrybPe³negoEkranu) {
+		zwróæInstancjêKlasyAppSettings().setFullscreen(czyUstawiæTrybPe³negoEkranu); }
+	
+	/**
+	 * Ustawia szerokoœæ.
+	 * @param szerokoœæ szerokoœæ
+	 */
+	@Override
+	public void ustawSzerokoœæ(Integer szerokoœæ) {
+		zwróæInstancjêKlasyAppSettings().setWidth(szerokoœæ); }
+
+	@Override
+	public void ustawWysokoœæ(Integer wysokoœæ) {	
+		zwróæInstancjêKlasyAppSettings().setHeight(wysokoœæ); }
+
+	@Override
+	public void ustawRodzielczoœæ(Integer szerokoœæ, Integer wysokoœæ) {
+		zwróæInstancjêKlasyAppSettings().setResolution(szerokoœæ, wysokoœæ); }
+
+	@Override
+	public void ustawMultipróbkowanie(EMultipróbkowanie multipróbkowanie) {
+		zwróæInstancjêKlasyAppSettings().setSamples(multipróbkowanie.zwróæIloœæPróbek()); }
+
+	@Override
+	public void ustawSynchronizacjêPionow¹(Boolean czyUstawiæSynchronizacjêPionow¹) {
+		zwróæInstancjêKlasyAppSettings().setVSync(czyUstawiæSynchronizacjêPionow¹); }
+
+	@Override
+	public void ustawCzêstotliwoœæ(Integer czêstotliwoœæ) { 
+		zwróæInstancjêKlasyAppSettings().setFrequency(czêstotliwoœæ); }
+
+	@Override
+	public void ustawBuforSzablonowy(EBuforSzablonowy buforSzablonowy) {
+		zwróæInstancjêKlasyAppSettings().setBitsPerPixel(buforSzablonowy.zwróæLiczbêBitówMatrycy()); }
+
+}

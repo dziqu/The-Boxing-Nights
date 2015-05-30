@@ -1,0 +1,23 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Model.Enumy;
+
+/**
+ * Typ reprezentujący lokalizacje danych plików
+ * i folderów.
+ */
+public enum ELokalizacjePlikówIFolderów {
+    FOLDER_ZAPISU_STANÓW_GRY("zapisaneStanyGry");
+    
+    private final String lokalizacja;
+    
+    private ELokalizacjePlikówIFolderów(String lokalizacja) {
+        this.lokalizacja = lokalizacja;
+    }
+    
+    public String zwróćLokalizację() {
+        return lokalizacja;
+    }
+}

@@ -1,0 +1,17 @@
+package Enumy;
+
+public enum ELokalizacjeINazwy {
+	
+	FOLDER_ZAPISU_STANÓW_GRY("zapisaneStanyGry");
+    
+    private final String lokalizacja;
+    
+    private ELokalizacjeINazwy(String lokalizacja) {
+        this.lokalizacja = lokalizacja;
+    }
+    
+    public String zwróæLokalizacjê() {
+        return lokalizacja;
+    }
+
+}

@@ -1,0 +1,9 @@
+package PakietyPodstawowe.Model.Interfejsy;
+
+public interface IIO {
+	
+	public static void drukuj(String wiadomoœæDoWydrukowania) {
+	}
+	public void drukuj(String wiadomoœæDoWydrukowania, boolean czyZnakNowejLinii);
+
+}

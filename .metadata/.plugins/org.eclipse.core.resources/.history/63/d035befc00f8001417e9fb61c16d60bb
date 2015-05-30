@@ -1,0 +1,12 @@
+package PakietyPodstawowe.Model.Interfejsy;
+
+public interface IIO {
+	
+	public static void drukuj(String wiadomoœæDoWydrukowania) {
+		System.out.print(wiadomoœæDoWydrukowania);
+	}
+	public static void drukujL(String wiadomoœæDoWydrukowania) {
+		System.out.println(wiadomoœæDoWydrukowania);
+	}
+
+}

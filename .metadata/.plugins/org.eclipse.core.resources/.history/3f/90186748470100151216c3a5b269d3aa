@@ -1,0 +1,54 @@
+package PakietyPodstawowe.Kontroler;
+
+import PakietyPodstawowe.Widok.ModelMenuNowejGry;
+
+import com.jme3.app.Application;
+import com.jme3.app.SimpleApplication;
+import com.jme3.app.state.AbstractAppState;
+
+import de.lessvoid.nifty.Nifty;
+import de.lessvoid.nifty.screen.Screen;
+import de.lessvoid.nifty.screen.ScreenController;
+
+/**
+ *
+ * @author Filip
+ */
+public class KontrolerMenuNowejGry extends AbstractAppState implements ScreenController {
+    
+    private final ModelMenuNowejGry modelMenuNowejGry;
+    private final SimpleApplication app;
+    private Nifty nifty;
+    private Screen screen;
+    
+    public KontrolerMenuNowejGry(Application app) {
+        this.modelMenuNowejGry = new ModelMenuNowejGry();
+        this.app = (SimpleApplication) app;
+        modelMenuNowejGry.inicjujObiekty(app);
+    }
+    
+    public void nowaGra() {
+        if (nifty != null) {
+            nifty.exit();
+        }
+        modelMenuNowejGry.nowaGra(this);
+    }
+    
+    public void anuluj() {
+        KontrolerMenuG³ównego kontrolerMenuG³ównego = new KontrolerMenuG³ównego(app);
+        kontrolerMenuG³ównego.wyœwietlMenuG³ówne();
+    }
+
+    public void bind(Nifty nifty, Screen screen) {
+        this.nifty = nifty;
+        this.screen = screen;
+    }
+
+    public void onStartScreen() {
+        
+    }
+
+    public void onEndScreen() {
+    }
+    
+}

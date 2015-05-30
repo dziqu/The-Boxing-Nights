@@ -1,0 +1,22 @@
+package Enumy;
+
+public enum ENazwy {
+	
+	FOLDER_ZAPISU_STANÓW_GRY("zapisaneStanyGry\\"),
+	FOLDER_USTAWIEÑ("ustawienia\\"),
+	PLIK_PRZECHOWUJ¥CY_LICZBÊ_URUCHOMIEÑ_PROGRAMU(FOLDER_USTAWIEÑ.zwróæLokalizacjê() + "ustawieniaWyswietlania.txt"),
+	PLIK_USTAWIEÑ_DOMYŒLNYCH_WYŒWIETLANIA("TBNUstDomyœlne"),
+	PLIK_USTAWIEÑ_TYMCZASOWYCH_WYŒWIETLANIA("TBNUstTymczasowe"),
+	PLIK_USTAWIEÑ_STEROWANIA();
+    
+    private final String lokalizacja;
+    
+    private ENazwy(String lokalizacja) {
+        this.lokalizacja = lokalizacja;
+    }
+    
+    public String zwróæLokalizacjê() {
+        return lokalizacja;
+    }
+
+}

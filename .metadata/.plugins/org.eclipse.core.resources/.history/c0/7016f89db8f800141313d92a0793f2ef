@@ -1,0 +1,16 @@
+package Interfejsy;
+
+import Enumy.EG³êbiaKolorów;
+import Enumy.ERenderery;
+
+import com.jme3.system.AppSettings;
+
+public interface IUstawienia {
+	
+	public AppSettings zwróæInstancjêKlasyAppSettings();
+	
+	public void ustawRenderer(ERenderery rodzajRenderera);
+	
+	public void ustawG³êbiêKolorów(EG³êbiaKolorów g³êbiaKolorów);
+
+}

@@ -1,0 +1,81 @@
+package PakietyPodstawowe.Start;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import Enumy.EWiersze;
+import Inne.UstawieniaWyświetlania;
+import PakietyPodstawowe.Kontroler.KontrolerMenuGłównego;
+import PakietyPodstawowe.Widok.WidokMenuGłównego;
+
+import com.jme3.app.SimpleApplication;
+
+/**
+ * Klasa uruchamiająca program. Tworzy pliki i foldery jeżeli ich nie ma oraz
+ * inicjuje dane początkowe.
+ */
+public final class KlasaStartowa extends SimpleApplication {
+
+    public static void main(String[] args) {
+    	// TODO mechanizm refleksji
+    	// TODO wyrażenia regularne (sprawdzanie argumentów, przykład w ustawieniach)
+        KlasaStartowa app = new KlasaStartowa();
+        UstawieniaWyświetlania ustawieniaWyświetlania = new UstawieniaWyświetlania(app);
+        Boolean plikUstawieńIstnieje = app.sprawdźCzyPlikUstawieńIstnieje();
+        
+        app.start();
+    }
+    
+    private Boolean sprawdźCzyPlikUstawieńIstnieje() {
+    	Boolean plikUstawieńIstnieje = false;
+    	return plikUstawieńIstnieje;
+    }
+
+    @Override
+    public void simpleInitApp() {
+    	
+        WidokMenuGłównego widokMenuGłównego = new WidokMenuGłównego();
+        KontrolerMenuGłównego kontrolerMenuGłównego = new KontrolerMenuGłównego(widokMenuGłównego, null, this);
+        kontrolerMenuGłównego.wyświetlMenuGłówne();
+
+        ustawWidocznośćKursora(true);
+    }
+    
+    private List <String> zwróćListęPrzechowującąDomyślneUstawieniaSterowania() {
+    	List <String> lista = new ArrayList<String>();
+    	lista.add(EWiersze.GRACZ_1_PRZÓD.zwróćWartośćDomyślną());
+    	lista.add(EWiersze.GRACZ_1_TYŁ.zwróćWartośćDomyślną());
+    	lista.add(EWiersze.GRACZ_1_LEWO.zwróćWartośćDomyślną());
+    	lista.add(EWiersze.GRACZ_1_PRAWO.zwróćWartośćDomyślną());
+    	lista.add(EWiersze.GRACZ_1_LEWA_GÓRA.zwróćWartośćDomyślną());
+    	lista.add(EWiersze.GRACZ_1_LEWA_DÓŁ.zwróćWartośćDomyślną());
+    	lista.add(EWiersze.GRACZ_1_PRAWA_GÓRA.zwróćWartośćDomyślną());
+    	lista.add(EWiersze.GRACZ_1_PRAWA_DÓŁ.zwróćWartośćDomyślną());
+    	lista.add(EWiersze.GRACZ_1_LEWY_PROSTY.zwróćWartośćDomyślną());
+    	lista.add(EWiersze.GRACZ_1_PRAWY_PROSTY.zwróćWartośćDomyślną());
+    	lista.add(EWiersze.GRACZ_1_LEWY_SIERPOWY.zwróćWartośćDomyślną());
+    	lista.add(EWiersze.GRACZ_1_PRAWY_SIERPOWY.zwróćWartośćDomyślną());
+    	lista.add(EWiersze.GRACZ_1_LEWY_HAK.zwróćWartośćDomyślną());
+    	lista.add(EWiersze.GRACZ_1_PRAWY_HAK.zwróćWartośćDomyślną());
+    	lista.add(EWiersze.GRACZ_2_PRZÓD.zwróćWartośćDomyślną());
+    	lista.add(EWiersze.GRACZ_2_TYŁ.zwróćWartośćDomyślną());
+    	lista.add(EWiersze.GRACZ_2_LEWO.zwróćWartośćDomyślną());
+    	lista.add(EWiersze.GRACZ_2_PRAWO.zwróćWartośćDomyślną());
+    	lista.add(EWiersze.GRACZ_2_LEWA_GÓRA.zwróćWartośćDomyślną());
+    	lista.add(EWiersze.GRACZ_2_LEWA_DÓŁ.zwróćWartośćDomyślną());
+    	lista.add(EWiersze.GRACZ_2_PRAWA_GÓRA.zwróćWartośćDomyślną());
+    	lista.add(EWiersze.GRACZ_2_PRAWA_DÓŁ.zwróćWartośćDomyślną());
+    	lista.add(EWiersze.GRACZ_2_LEWY_PROSTY.zwróćWartośćDomyślną());
+    	lista.add(EWiersze.GRACZ_2_PRAWY_PROSTY.zwróćWartośćDomyślną());
+    	lista.add(EWiersze.GRACZ_2_LEWY_SIERPOWY.zwróćWartośćDomyślną());
+    	lista.add(EWiersze.GRACZ_2_PRAWY_SIERPOWY.zwróćWartośćDomyślną());
+    	lista.add(EWiersze.GRACZ_2_LEWY_HAK.zwróćWartośćDomyślną());
+    	lista.add(EWiersze.GRACZ_2_PRAWY_HAK.zwróćWartośćDomyślną());
+    	
+    	return lista;
+    }
+
+    public void ustawWidocznośćKursora(boolean czyKursorMaByćWidoczny) {
+        flyCam.setDragToRotate(czyKursorMaByćWidoczny);
+    }
+}

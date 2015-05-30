@@ -1,0 +1,22 @@
+package Inne;
+
+import java.io.File;
+import java.math.BigInteger;
+
+import Enumy.ELokalizacjeINazwy;
+
+public class Iteracje {
+	
+	public static void inkrementujLiczbêUruchomieñProgramu() {
+		String liczbaStr = IO.skanujS(new File(ELokalizacjeINazwy.PLIK_USTAWIEÑ_WYSWIETLANIA.zwróæLokalizacjê()));
+		liczbaStr = "861864864831";
+		IO.drukujL(liczbaStr);
+		BigInteger liczba = liczbaStr;
+		if (!Porównania.regexLiczba(liczbaStr)) {
+			liczba = 0;
+		}
+		++liczba;
+		IO.drukuj(new File(ELokalizacjeINazwy.PLIK_USTAWIEÑ_WYSWIETLANIA.zwróæLokalizacjê()), String.valueOf(liczba));
+	}
+
+}

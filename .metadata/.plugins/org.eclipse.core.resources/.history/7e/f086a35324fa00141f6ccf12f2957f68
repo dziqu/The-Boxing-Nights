@@ -1,0 +1,212 @@
+package Inne;
+
+import java.awt.Dimension;
+import java.awt.DisplayMode;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
+import java.awt.Toolkit;
+import java.io.File;
+import java.math.BigInteger;
+import java.util.prefs.BackingStoreException;
+
+import Enumy.EBuforSzablonowy;
+import Enumy.EG³êbiaKolorów;
+import Enumy.ENazwy;
+import Enumy.EMultipróbkowanie;
+import Enumy.ERenderery;
+import Interfejsy.IUstawieniaWyœwietlania;
+
+import com.jme3.app.SimpleApplication;
+import com.jme3.system.AppSettings;
+
+/**
+ * Klasa ustawia ustawienia wyœwietlania.
+ */
+public class UstawieniaWyœwietlania implements IUstawieniaWyœwietlania {
+	
+	private SimpleApplication app;
+	private AppSettings ustawienia;
+	
+	/**
+	 * Konstruktor domyœlny.
+	 */
+	public UstawieniaWyœwietlania(SimpleApplication app) {
+		ustawInstancjêKlasySimpleApplication(app);
+		ustawUstawieniaDomyœlne(new AppSettings(true));
+		ustawUstawieniaTymczasowe(new AppSettings(true));
+		}
+	
+	@Override
+	public void ustawInstancjêKlasySimpleApplication(SimpleApplication app) { this.app = app; }
+	
+	@Override
+	public SimpleApplication zwróæInstancjêKlasySimpleApplication() { return app; }
+	
+	/**
+	 * Ustawia instancjê klasy AppSettings.
+	 * @param ustawienia instancja klasy AppSettings
+	 */
+	@Override
+	public void ustawUstawieniaDomyœlne(AppSettings ustawienia) { this.ustawienia = ustawienia; }
+	
+	/**
+	 * Zwraca instancjê klasy AppSettings.
+	 * @return instancja klasy AppSettings
+	 */
+	@Override
+	public AppSettings zwróæUstawienia() { return ustawienia; }
+	
+	@Override
+	public void inicjujUstawieniaPocz¹tkowe() {
+		File plik = new File(ENazwy.PLIK_PRZECHOWUJ¥CY_LICZBÊ_URUCHOMIEÑ_PROGRAMU.zwróæLokalizacjê());
+		Boolean nieZnalezionoPlikuUstawieñ = !IO.istniejePlik(plik);
+		if (nieZnalezionoPlikuUstawieñ) {
+			IO.drukuj(plik);
+		} 
+		BigInteger liczbaUruchomieñProgramu = Iteracje.inkrementujLiczbêUruchomieñProgramu();
+		Boolean programZosta³UruchomionyPierwszyRaz = Porównania.porównaj(liczbaUruchomieñProgramu, BigInteger.ONE) == 0;
+		if (programZosta³UruchomionyPierwszyRaz) {
+			pobierzUstawieniaDomyœlneZSystemu();
+		}
+		ustawEkranDialogowy(false);
+		wczytaj(ENazwy.PLIK_USTAWIEÑ_TYMCZASOWYCH_WYŒWIETLANIA.zwróæLokalizacjê());
+		zwróæInstancjêKlasySimpleApplication().setSettings(ustawienia);
+	}
+	
+	private void pobierzUstawieniaDomyœlneZSystemu() {
+		GraphicsDevice urz¹dzenie = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+		DisplayMode[] trybyWyœwietlania = urz¹dzenie.getDisplayModes();
+		int rozmiarTablicyPrzechowuj¹cejTrybyWyœwietlania = trybyWyœwietlania.length;
+		if (rozmiarTablicyPrzechowuj¹cejTrybyWyœwietlania > 0) {
+			ustawRenderer(ERenderery.OpenGL2);
+			ustawG³êbiêKolorów(EG³êbiaKolorów.BPP32);
+			ustawIloœæKlatek(60);
+			ustawTrybPe³negoEkranu(true);
+			Dimension rozdzielczoœæEkranu = pobierzRozdzielczoœæEkranu();
+			int wysokoœæ = (int) rozdzielczoœæEkranu.getHeight();
+			int szerokoœæ = (int) rozdzielczoœæEkranu.getWidth();
+			ustawRozdzielczoœæ(szerokoœæ, wysokoœæ);
+			ustawMultipróbkowanie(EMultipróbkowanie.PRÓBEK_4);
+			ustawSynchronizacjêPionow¹(false);
+			zapisz(ENazwy.PLIK_USTAWIEÑ_DOMYŒLNYCH_WYŒWIETLANIA.zwróæLokalizacjê());
+			zapisz(ENazwy.PLIK_USTAWIEÑ_TYMCZASOWYCH_WYŒWIETLANIA.zwróæLokalizacjê());
+		}
+	}
+	
+	private Dimension pobierzRozdzielczoœæEkranu() {
+		return Toolkit.getDefaultToolkit().getScreenSize(); }
+	
+	@Override
+	public void ustawEkranDialogowy(Boolean czyWyœwietliæEkranDialogowy) {
+		zwróæInstancjêKlasySimpleApplication().setShowSettings(czyWyœwietliæEkranDialogowy);
+	}
+	
+	/**
+	 * Ustawia renderer.
+	 * @param rodzajRenderera rodzaj renderera
+	 */
+	@Override
+	public void ustawRenderer(ERenderery rodzajRenderera) { 
+		zwróæUstawienia().setRenderer(rodzajRenderera.zwróæRenderer()); }
+	
+	/**
+	 * Ustawia g³êbiê kolorów.
+	 * @param g³êbiaKolorów g³êbiaKolorów
+	 */
+	@Override
+	public void ustawG³êbiêKolorów(EG³êbiaKolorów g³êbiaKolorów) { 
+		zwróæUstawienia().setBitsPerPixel(g³êbiaKolorów.zwróæIloœæBitówNaPiksel()); }
+	
+	/**
+	 * Ustawia iloœæ klatek.
+	 * @param iloœæKlatek iloœæ klatek
+	 */
+	@Override
+	public void ustawIloœæKlatek(Integer iloœæKlatek) {
+		zwróæUstawienia().setFrameRate(iloœæKlatek); }
+	
+	/**
+	 * Ustawia tryb pe³nego ekranu.
+	 * @param czyUstawiæTrybPe³negoEkranu czy ustawiæ tryb pe³nego ektanu
+	 */
+	@Override
+	public void ustawTrybPe³negoEkranu(Boolean czyUstawiæTrybPe³negoEkranu) {
+		zwróæUstawienia().setFullscreen(czyUstawiæTrybPe³negoEkranu); }
+	
+	/**
+	 * Ustawia szerokoœæ.
+	 * @param szerokoœæ szerokoœæ
+	 */
+	@Override
+	public void ustawSzerokoœæ(Integer szerokoœæ) {
+		zwróæUstawienia().setWidth(szerokoœæ); }
+	
+	/**
+	 * Ustawia wysokoœæ.
+	 * @param wysokoœæ wysokoœæ
+	 */
+	@Override
+	public void ustawWysokoœæ(Integer wysokoœæ) {	
+		zwróæUstawienia().setHeight(wysokoœæ); }
+	
+	/**
+	 * Ustawia rozdzielczoœæ.
+	 * @param szerokoœæ szerokoœæ
+	 * @param wysokoœæ wysokoœæ
+	 */
+	@Override
+	public void ustawRozdzielczoœæ(Integer szerokoœæ, Integer wysokoœæ) {
+		zwróæUstawienia().setResolution(szerokoœæ, wysokoœæ); }
+	
+	/**
+	 * Ustawia multipróbkowanie.
+	 * @param multipróbkowanie multipróbkowanie
+	 */
+	@Override
+	public void ustawMultipróbkowanie(EMultipróbkowanie multipróbkowanie) {
+		zwróæUstawienia().setSamples(multipróbkowanie.zwróæIloœæPróbek()); }
+	
+	/**
+	 * Ustawia synchronizacjê pionow¹.
+	 * @param czyUstawiæSynchronizacjêPionow¹ czy ustawiæ synchronizacjê pionow¹
+	 */
+	@Override
+	public void ustawSynchronizacjêPionow¹(Boolean czyUstawiæSynchronizacjêPionow¹) {
+		zwróæUstawienia().setVSync(czyUstawiæSynchronizacjêPionow¹); }
+	
+	/**
+	 * Ustawia czêstotliwoœæ.
+	 * @param czêstotliwoœæ czêstotliwoœæ
+	 */
+	@Override
+	public void ustawCzêstotliwoœæ(Integer czêstotliwoœæ) { 
+		zwróæUstawienia().setFrequency(czêstotliwoœæ); }
+	
+	/**
+	 * Ustawia bufor szablonowy
+	 * @param buforSzablonowy bufor szablonowy
+	 */
+	@Override
+	public void ustawBuforSzablonowy(EBuforSzablonowy buforSzablonowy) {
+		zwróæUstawienia().setBitsPerPixel(buforSzablonowy.zwróæLiczbêBitówMatrycy()); }
+
+	@Override
+	public void zapisz(String nazwa) { 
+		try { zwróæUstawienia().save(nazwa); } 
+		catch (BackingStoreException e) { e.printStackTrace(); } }
+
+	@Override
+	public void wczytaj(String nazwa) { 
+		try { zwróæUstawienia().load(nazwa); } 
+		catch (BackingStoreException e) { e.printStackTrace(); } }
+	
+	@Override
+	public void kopiuj(AppSettings ustawieniaród³owe, AppSettings ustawieniaDocelowe) {
+		try {ustawieniaDocelowe.copyFrom(ustawieniaród³owe);}
+		catch (Exception ex) {ex.printStackTrace();}}
+	
+	@Override
+	public void ustawUstawienia(AppSettings ustawienia) {
+		zwróæInstancjêKlasySimpleApplication().setSettings(zwróæUstawienia()); }
+
+}

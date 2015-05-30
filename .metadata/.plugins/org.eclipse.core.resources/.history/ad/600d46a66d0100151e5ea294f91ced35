@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<nifty>
+    <useControls filename="nifty-default-controls.xml"/>
+    <useStyles filename="nifty-default-styles.xml"/>
+    <screen id="ustawieniaWyswietlania" controller="PakietyPodstawowe.Kontroler.KontrolerUstawieńWyświetlania">
+        <layer id="GLayer0" childLayout="center">
+            <panel id="GPanel0" childLayout="absolute" backgroundImage="panel/nifty-panel-simple.png" width="100%" style="nifty-panel-simple" height="100%">
+                <control name="radioButton" id="GRadioButton0" x="279" y="176">
+                	<interact onClick="wyświetl("opcja1")"/>
+                </control>
+                <control name="radioButton" id="GRadioButton1" x="420" y="173"/>
+                <control name="radioButtonGroup" id="GRadioGroup0" childLayout="absolute" width="327px" x="353" y="352" height="96px">
+                    <control name="radioButton" id="GRadioButton2" x="225" y="52"/>
+                </control>
+            </panel>
+        </layer>
+    </screen>
+</nifty>

@@ -1,0 +1,75 @@
+package Inne;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import com.jme3.input.KeyInput;
+import com.jme3.input.controls.KeyTrigger;
+import com.jme3.input.controls.Trigger;
+
+public class SterowanieGraczem1 {
+	
+	private Map <String, Integer> mapaZnaków;
+	
+	public SterowanieGraczem1() {
+		inicjujMapêZnaków();
+	}
+	
+	public static Integer zwróæZnak(String wiadomoœæ) {
+		Integer znak = null;
+		if (Porównania.porównaj(wiadomoœæ, "0") == 0) znak = KeyInput.KEY_0;
+		if (Porównania.porównaj(wiadomoœæ, "1") == 0) znak = KeyInput.KEY_1;
+		if (Porównania.porównaj(wiadomoœæ, "2") == 0) znak = KeyInput.KEY_2;
+		if (Porównania.porównaj(wiadomoœæ, "3") == 0) znak = KeyInput.KEY_3;
+		if (Porównania.porównaj(wiadomoœæ, "4") == 0) znak = KeyInput.KEY_4;
+		if (Porównania.porównaj(wiadomoœæ, "5") == 0) znak = KeyInput.KEY_5;
+		if (Porównania.porównaj(wiadomoœæ, "6") == 0) znak = KeyInput.KEY_6;
+		if (Porównania.porównaj(wiadomoœæ, "7") == 0) znak = KeyInput.KEY_7;
+		if (Porównania.porównaj(wiadomoœæ, "8") == 0) znak = KeyInput.KEY_8;
+		if (Porównania.porównaj(wiadomoœæ, "9") == 0) znak = KeyInput.KEY_9;
+		if (Porównania.porównaj(wiadomoœæ, "a") == 0) znak = KeyInput.KEY_A;
+		if (Porównania.porównaj(wiadomoœæ, "b") == 0) znak = KeyInput.KEY_B;
+		if (Porównania.porównaj(wiadomoœæ, "c") == 0) znak = KeyInput.KEY_C;
+		if (Porównania.porównaj(wiadomoœæ, "d") == 0) znak = KeyInput.KEY_D;
+		if (Porównania.porównaj(wiadomoœæ, "e") == 0) znak = KeyInput.KEY_E;
+		if (Porównania.porównaj(wiadomoœæ, "f") == 0) znak = KeyInput.KEY_F;
+		if (Porównania.porównaj(wiadomoœæ, "g") == 0) znak = KeyInput.KEY_G;
+		if (Porównania.porównaj(wiadomoœæ, "h") == 0) znak = KeyInput.KEY_H;
+		if (Porównania.porównaj(wiadomoœæ, "i") == 0) znak = KeyInput.KEY_I;
+		if (Porównania.porównaj(wiadomoœæ, "j") == 0) znak = KeyInput.KEY_J;
+		if (Porównania.porównaj(wiadomoœæ, "k") == 0) znak = KeyInput.KEY_K;
+		if (Porównania.porównaj(wiadomoœæ, "l") == 0) znak = KeyInput.KEY_L;
+		if (Porównania.porównaj(wiadomoœæ, "m") == 0) znak = KeyInput.KEY_M;
+		if (Porównania.porównaj(wiadomoœæ, "n") == 0) znak = KeyInput.KEY_N;
+		if (Porównania.porównaj(wiadomoœæ, "o") == 0) znak = KeyInput.KEY_O;
+		if (Porównania.porównaj(wiadomoœæ, "p") == 0) znak = KeyInput.KEY_P;
+		if (Porównania.porównaj(wiadomoœæ, "r") == 0) znak = KeyInput.KEY_R;
+		if (Porównania.porównaj(wiadomoœæ, "s") == 0) znak = KeyInput.KEY_S;
+		if (Porównania.porównaj(wiadomoœæ, "t") == 0) znak = KeyInput.KEY_T;
+		if (Porównania.porównaj(wiadomoœæ, "u") == 0) znak = KeyInput.KEY_U;
+		if (Porównania.porównaj(wiadomoœæ, "v") == 0) znak = KeyInput.KEY_V;
+		if (Porównania.porównaj(wiadomoœæ, "w") == 0) znak = KeyInput.KEY_W;
+		if (Porównania.porównaj(wiadomoœæ, "x") == 0) znak = KeyInput.KEY_X;
+		if (Porównania.porównaj(wiadomoœæ, "y") == 0) znak = KeyInput.KEY_Y;
+		if (Porównania.porównaj(wiadomoœæ, "z") == 0) znak = KeyInput.KEY_Z;
+		if (Porównania.porównaj(wiadomoœæ, "NUMPAD0") == 0) znak = KeyInput.KEY_NUMPAD0;
+		if (Porównania.porównaj(wiadomoœæ, "NUMPAD1") == 0) znak = KeyInput.KEY_NUMPAD1;
+		if (Porównania.porównaj(wiadomoœæ, "NUMPAD2") == 0) znak = KeyInput.KEY_NUMPAD2;
+		if (Porównania.porównaj(wiadomoœæ, "NUMPAD3") == 0) znak = KeyInput.KEY_NUMPAD3;
+		if (Porównania.porównaj(wiadomoœæ, "NUMPAD4") == 0) znak = KeyInput.KEY_NUMPAD4;
+		if (Porównania.porównaj(wiadomoœæ, "NUMPAD5") == 0) znak = KeyInput.KEY_NUMPAD5;
+		if (Porównania.porównaj(wiadomoœæ, "NUMPAD6") == 0) znak = KeyInput.KEY_NUMPAD6;
+		if (Porównania.porównaj(wiadomoœæ, "NUMPAD7") == 0) znak = KeyInput.KEY_NUMPAD7;
+		if (Porównania.porównaj(wiadomoœæ, "NUMPAD8") == 0) znak = KeyInput.KEY_NUMPAD8;
+		if (Porównania.porównaj(wiadomoœæ, "NUMPAD9") == 0) znak = KeyInput.KEY_NUMPAD9;
+		
+		return znak;
+	}
+	
+	private void inicjujMapêZnaków() {
+		mapaZnaków = new HashMap();
+		mapaZnaków.put("0", KeyInput.KEY_0);
+		mapaZnaków.put("1", KeyInput.KEY_1);
+	}
+
+}

@@ -1,0 +1,26 @@
+package Inne;
+
+import com.jme3.input.KeyInput;
+import com.jme3.input.controls.KeyTrigger;
+import com.jme3.input.controls.Trigger;
+
+public class SterowanieGraczem1 {
+	
+	private final Trigger TRIGGER_DO_PRZODU;
+	
+	public SterowanieGraczem1() {
+		TRIGGER_DO_PRZODU = new KeyTrigger(KeyInput.KEY_A);
+	}
+	
+	public Integer zwróæZnak(String wiadomoœæ) {
+		Integer znak = null;
+		if (Porównania.porównaj(wiadomoœæ, "1") == 0) znak = KeyInput.KEY_1;
+		if (Porównania.porównaj(wiadomoœæ, "2") == 0) znak = KeyInput.KEY_2;
+		if (Porównania.porównaj(wiadomoœæ, "3") == 0) znak = KeyInput.KEY_3;
+		if (Porównania.porównaj(wiadomoœæ, "4") == 0) znak = KeyInput.KEY_4;
+		if (Porównania.porównaj(wiadomoœæ, "5") == 0) znak = KeyInput.KEY_5;
+		
+		return znak;
+	}
+
+}

@@ -1,0 +1,93 @@
+package PakietyPodstawowe.Kontroler;
+
+import PakietyPodstawowe.Model.ModelMenuG³ównego;
+import PakietyPodstawowe.Model.ModelMenuNowejGry;
+import PakietyPodstawowe.Widok.WidokMenuG³ównego;
+import PakietyPodstawowe.Widok.WidokMenuNowejGry;
+
+import com.jme3.app.Application;
+import com.jme3.app.SimpleApplication;
+import com.jme3.app.state.AbstractAppState;
+import com.jme3.app.state.AppStateManager;
+import com.jme3.asset.AssetManager;
+import com.jme3.audio.AudioRenderer;
+import com.jme3.input.InputManager;
+import com.jme3.renderer.ViewPort;
+
+import de.lessvoid.nifty.Nifty;
+import de.lessvoid.nifty.screen.Screen;
+import de.lessvoid.nifty.screen.ScreenController;
+
+public final class KontrolerMenuG³ównego extends AbstractAppState implements ScreenController {
+	
+	private final WidokMenuG³ównego widokMenuG³ównego;
+    private final ModelMenuG³ównego modelMenuG³ównego;
+    private final SimpleApplication app;
+    private Nifty nifty;
+    private Screen screen;
+    
+     public KontrolerMenuG³ównego(final Application app) {
+        this.widokMenuG³ównego = new WidokMenuG³ównego();
+        this.modelMenuG³ównego = new ModelMenuG³ównego();
+        
+        this.app = (SimpleApplication) app;
+    }
+
+    public void wyœwietlMenuG³ówne() {
+        if (nifty != null) {
+            nifty.exit();
+        }
+        widokMenuG³ównego.inicjujObiekty(this.app);
+        widokMenuG³ównego.wyœwietlMenuG³ówne(this);
+    }
+    
+    public void nowaGra() {
+        ModelMenuNowejGry modelMenuNowejGry = new ModelMenuNowejGry();
+        WidokMenuNowejGry widokMenuNowejGry = new WidokMenuNowejGry();
+        KontrolerMenuNowejGry kontrolerMenuNowejGry = new KontrolerMenuNowejGry(widokMenuNowejGry, modelMenuNowejGry, app);
+        kontrolerMenuNowejGry.nowaGra();
+        if (nifty != null) {
+            nifty.exit();
+        }
+    }
+    
+    public void wczytajGrê() { }
+    
+    public void multiplayer() { }
+    
+    public void ustawienia() {
+        
+    }
+    
+    public void oGrze() {
+        
+    }
+    
+    public void wyjdŸ() {
+        System.exit(1);
+    }
+
+    public void bind(Nifty nifty, Screen screen) {
+        this.nifty = nifty;
+        this.setScreen(screen);
+    }
+
+    public void onStartScreen() {
+    }
+
+    public void onEndScreen() {
+    }
+
+	public ModelMenuG³ównego getModelMenuG³ównego() {
+		return modelMenuG³ównego;
+	}
+
+	public Screen getScreen() {
+		return screen;
+	}
+
+	public void setScreen(Screen screen) {
+		this.screen = screen;
+	}
+
+}

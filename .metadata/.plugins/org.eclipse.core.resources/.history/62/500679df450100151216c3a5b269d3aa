@@ -1,0 +1,154 @@
+package PakietyPodstawowe.Kontroler;
+
+import PakietyPodstawowe.Model.ModelMenuNowejGry;
+import PakietyPodstawowe.Widok.ModelMenuG³ównego;
+import PakietyPodstawowe.Widok.WidokMenuNowejGry;
+
+import com.jme3.app.Application;
+import com.jme3.app.SimpleApplication;
+import com.jme3.app.state.AbstractAppState;
+import com.jme3.app.state.AppStateManager;
+import com.jme3.asset.AssetManager;
+import com.jme3.audio.AudioRenderer;
+import com.jme3.input.InputManager;
+import com.jme3.renderer.ViewPort;
+
+import de.lessvoid.nifty.Nifty;
+import de.lessvoid.nifty.screen.Screen;
+import de.lessvoid.nifty.screen.ScreenController;
+
+/**
+ *
+ * @author Filip
+ */
+public class KontrolerMenuNowejGry extends AbstractAppState implements ScreenController {
+    
+    private final WidokMenuNowejGry widokMenuNowejGry;
+    private final ModelMenuNowejGry modelMenuNowejGry;
+    private final SimpleApplication app;
+    
+    public Nifty getNifty() {
+		return nifty;
+	}
+
+	public void setNifty(Nifty nifty) {
+		this.nifty = nifty;
+	}
+
+	public WidokMenuNowejGry getWidokMenuNowejGry() {
+		return widokMenuNowejGry;
+	}
+
+	public SimpleApplication getApp() {
+		return app;
+	}
+
+	private ViewPort viewPort;
+    private AssetManager assetManager;
+    private InputManager inputManager;
+    private AudioRenderer audioRenderer;
+    private ViewPort guiViewPort;
+    private AppStateManager stateManager;
+    private Nifty nifty;
+    private Screen screen;
+    
+    public KontrolerMenuNowejGry(WidokMenuNowejGry widokMenuNowejGry, ModelMenuNowejGry modelMenuNowejGry, Application app) {
+        this.widokMenuNowejGry = widokMenuNowejGry;
+        this.modelMenuNowejGry = modelMenuNowejGry;
+        this.app = (SimpleApplication) app;
+        this.setViewPort(this.app.getViewPort());
+        this.setAssetManager(this.app.getAssetManager());
+        this.setInputManager(this.app.getInputManager());
+        this.setAudioRenderer(this.app.getAudioRenderer());
+        this.setGuiViewPort(this.app.getGuiViewPort());
+        this.setStateManager(this.app.getStateManager());
+    }
+    
+    public void nowaGra() {
+        if (nifty != null) {
+            nifty.exit();
+        }
+        widokMenuNowejGry.inicjujObiekty(app);
+        widokMenuNowejGry.nowaGra(this);
+    }
+    
+    public void anuluj() {
+        ModelMenuG³ównego widokMenuG³ównego = new ModelMenuG³ównego();
+        ModelMenuG³ównego modelMenuG³ównego = new ModelMenuG³ównego();
+        KontrolerMenuG³ównego kontrolerMenuG³ównego = new KontrolerMenuG³ównego(app);
+        kontrolerMenuG³ównego.wyœwietlMenuG³ówne();
+    }
+
+    public void bind(Nifty nifty, Screen screen) {
+        this.nifty = nifty;
+        this.setScreen(screen);
+    }
+
+    public void onStartScreen() {
+        
+    }
+
+    public void onEndScreen() {
+    }
+
+	public ViewPort getViewPort() {
+		return viewPort;
+	}
+
+	public void setViewPort(ViewPort viewPort) {
+		this.viewPort = viewPort;
+	}
+
+	public AssetManager getAssetManager() {
+		return assetManager;
+	}
+
+	public void setAssetManager(AssetManager assetManager) {
+		this.assetManager = assetManager;
+	}
+
+	public InputManager getInputManager() {
+		return inputManager;
+	}
+
+	public void setInputManager(InputManager inputManager) {
+		this.inputManager = inputManager;
+	}
+
+	public AudioRenderer getAudioRenderer() {
+		return audioRenderer;
+	}
+
+	public void setAudioRenderer(AudioRenderer audioRenderer) {
+		this.audioRenderer = audioRenderer;
+	}
+
+	public ViewPort getGuiViewPort() {
+		return guiViewPort;
+	}
+
+	public void setGuiViewPort(ViewPort guiViewPort) {
+		this.guiViewPort = guiViewPort;
+	}
+
+	public AppStateManager getStateManager() {
+		return stateManager;
+	}
+
+	public void setStateManager(AppStateManager stateManager) {
+		this.stateManager = stateManager;
+	}
+
+	public Screen getScreen() {
+		return screen;
+	}
+
+	public void setScreen(Screen screen) {
+		this.screen = screen;
+	}
+
+	public ModelMenuNowejGry getModelMenuNowejGry() {
+		return modelMenuNowejGry;
+	}
+    
+}

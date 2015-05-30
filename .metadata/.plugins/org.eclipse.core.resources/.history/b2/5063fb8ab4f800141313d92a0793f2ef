@@ -1,0 +1,5 @@
+package PakietyPodstawowe.Kontroler.KontrolerInterfejsu;
+
+public class KontrolerWczytaniaGry {
+
+}

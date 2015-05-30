@@ -1,0 +1,52 @@
+package PakietyPodstawowe.Kontroler;
+
+import org.bushe.swing.event.EventServiceExistsException;
+import org.bushe.swing.event.EventServiceLocator;
+
+import PakietyPodstawowe.Model.ModelMenuG³ównego;
+
+import com.jme3.app.Application;
+import com.jme3.app.SimpleApplication;
+import com.jme3.app.state.AbstractAppState;
+
+import de.lessvoid.nifty.Nifty;
+import de.lessvoid.nifty.screen.Screen;
+import de.lessvoid.nifty.screen.ScreenController;
+
+public final class KontrolerMenuG³ównego extends AbstractAppState implements ScreenController {
+	
+	private final 	ModelMenuG³ównego 	modelMenuG³ównego;
+    private final 	SimpleApplication 	app;
+    
+    public KontrolerMenuG³ównego(final Application app) {
+        this.modelMenuG³ównego 	= new ModelMenuG³ównego();
+        this.app 				= (SimpleApplication) app;
+        
+        modelMenuG³ównego.inicjujObiekty(this.app);
+        modelMenuG³ównego.wyœwietlMenuG³ówne(this);
+    }
+    
+    public void nowaGra() {
+    	 try {
+             EventServiceLocator.setEventService("NiftyEventBus", null);
+             new KontrolerMenuNowejGry(app);
+         } catch (EventServiceExistsException ex) {}
+    }
+    
+    public void wczytajGrê() { }
+    
+    public void multiplayer() { }
+    
+    public void ustawienia() { }
+    
+    public void oGrze() { }
+    
+    public void wyjdŸ() { System.exit(1); }
+
+    public void bind(Nifty nifty, Screen screen) { }
+
+    public void onStartScreen() { }
+
+    public void onEndScreen() { }
+
+}

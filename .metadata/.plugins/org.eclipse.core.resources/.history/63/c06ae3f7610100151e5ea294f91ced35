@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<nifty>
+    <useControls filename="nifty-default-controls.xml"/>
+    <useStyles filename="nifty-default-styles.xml"/>
+    <screen id="ustawienia" controller="PakietyPodstawowe.Kontroler.KontrolerUstawień">
+        <layer id="GLayer0" childLayout="center">
+            <panel id="GPanel0" childLayout="center" width="100%" style="nifty-panel-simple" height="100%">
+                <panel id="GPanel1" childLayout="vertical" width="50%" style="nifty-panel-simple" height="65%">
+                    <panel id="GPanel2" childLayout="center" width="100%" x="164" y="112" style="nifty-panel-simple" height="33%">
+                        <control name="button" id="GButton0" childLayout="center" width="40%" label="Wyswietlanie" height="40%"/>
+                    </panel>
+                    <panel id="GPanel3" childLayout="center" width="100%" style="nifty-panel-simple" height="33%">
+                        <control name="button" id="GButton1" childLayout="center" width="40%" label="Sterowanie" height="40%"/>
+                    </panel>
+                    <panel id="GPanel4" childLayout="center" width="100%" style="nifty-panel-simple" height="33%">
+                        <control name="button" id="GButton2" childLayout="center" width="40%" label="Anuluj" height="40%"/>
+                    </panel>
+                </panel>
+            </panel>
+        </layer>
+    </screen>
+</nifty>
