@@ -20,6 +20,7 @@ import com.jme3.input.KeyInput;
 import com.jme3.input.controls.ActionListener;
 import com.jme3.input.controls.KeyTrigger;
 import com.jme3.light.AmbientLight;
+import com.jme3.material.Material;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Ray;
@@ -32,6 +33,8 @@ import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 import com.jme3.scene.plugins.blender.BlenderModelLoader;
+import com.jme3.texture.Texture;
+import com.jme3.texture.Texture.WrapMode;
 
 import Implementations.Controllers.TBNPlayerComputerGameController;
 import Implementations.Others.IO;
@@ -66,6 +69,7 @@ public class TBNPlayerComputerGameModel extends AbstractAppState implements
 	private boolean down;
 	private RenderManager renderManager;
 	private ChaseCamera chaseCam2;
+	private Material matRock;
 
 	public TBNPlayerComputerGameModel(
 			final SimpleApplication app,
@@ -102,7 +106,9 @@ public class TBNPlayerComputerGameModel extends AbstractAppState implements
 		
 		assetManager.registerLoader(BlenderModelLoader.class, "blend");
 		Spatial scene = assetManager.loadModel("Assets/Scenes/scene.blend");
+		Node mesh = (Node) assetManager.loadModel("Assets/Models/mesh.blend");
 		rootNode.attachChild(scene);
+		rootNode.attachChild(mesh);
 
 //		assetManager.registerLocator(
 //				"http://jmonkeyengine.googlecode.com/files/quake3level.zip",
@@ -126,6 +132,7 @@ public class TBNPlayerComputerGameModel extends AbstractAppState implements
 		character = new CharacterControl(capsule, 0.05f);
 		character.setJumpSpeed(20f);
 		model = (Node) assetManager.loadModel("Assets/Models/Genesis2Male-geom.mesh.xml");
+		
 		model.setLocalScale(0.02f);
 		model.addControl(character);
 		bulletAppState.getPhysicsSpace().add(character);
