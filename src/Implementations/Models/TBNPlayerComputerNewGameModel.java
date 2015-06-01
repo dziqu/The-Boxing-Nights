@@ -21,6 +21,7 @@ public class TBNPlayerComputerNewGameModel {
 	private AppStateManager stateManager;
 	private TBNPlayerComputerNewGameController tbnPlayerComputerNewGameController;
 	private Node ring;
+	private Node player1;
 
 	public TBNPlayerComputerNewGameModel(Application app,
 			TBNPlayerComputerNewGameController tbnPlayerComputerNewGameController) {
@@ -41,6 +42,10 @@ public class TBNPlayerComputerNewGameModel {
 		ring.addControl(new RigidBodyControl(0f));
 		rootNode.attachChild(ring);
 		bulletAppState.getPhysicsSpace().addAll(ring);
+		
+		player1 = (Node) assetManager.loadModel("Assets/Models/player/player.blend");
+		player1.setLocalScale(3f);
+		rootNode.attachChild(player1);
 	}
 
 }
