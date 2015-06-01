@@ -37,11 +37,16 @@ public final class TBNNewGameMenuController extends AbstractAppState implements 
 		}
 	}
 	
-	public void ok() {
+	public void setPlayerComputerGame() {
 		if (nifty != null) nifty.exit();
 		stateManager.attach(new TBNPlayerComputerGameController());
 	}
-
+	
+	public void setPlayerPlayerController() {
+		if (nifty != null) nifty.exit();
+		stateManager.attach(new TBNPlayerPlayerGameController());
+	}
+	
 	public void cancel() {
 		if (nifty != null) nifty.exit();
 		stateManager.attach(new TBNMainMenuController());

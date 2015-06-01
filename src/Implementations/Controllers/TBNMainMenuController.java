@@ -57,7 +57,7 @@ public final class TBNMainMenuController extends AbstractAppState implements Scr
 	
 	@Override
 	public void bind(Nifty nifty, Screen screen) {
-		this.nifty = nifty;
+		this.nifty 	= nifty;
 		this.screen = screen; }
 	
 	@Override

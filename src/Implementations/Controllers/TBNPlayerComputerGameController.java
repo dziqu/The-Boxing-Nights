@@ -1,10 +1,5 @@
 package Implementations.Controllers;
 
-import Implementations.Models.TBNPlayerComputerGameModel;
-import Implementations.Others.IO;
-import Interfaces.Collator;
-
-import com.jme3.animation.AnimControl;
 import com.jme3.app.Application;
 import com.jme3.app.SimpleApplication;
 import com.jme3.app.state.AbstractAppState;
