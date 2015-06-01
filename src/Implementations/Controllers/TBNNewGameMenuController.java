@@ -1,6 +1,7 @@
 package Implementations.Controllers;
 
 import Implementations.Models.TBNNewGameMenuModel;
+import Interfaces.NewGameMenuController;
 
 import com.jme3.app.Application;
 import com.jme3.app.SimpleApplication;
@@ -15,7 +16,7 @@ import de.lessvoid.nifty.screen.ScreenController;
  *
  * @author Filip
  */
-public final class TBNNewGameMenuController extends AbstractAppState implements ScreenController {
+public final class TBNNewGameMenuController extends AbstractAppState implements ScreenController, NewGameMenuController {
 
 	private TBNNewGameMenuModel newGameMenuModel;
 	private SimpleApplication app;
@@ -37,22 +38,28 @@ public final class TBNNewGameMenuController extends AbstractAppState implements 
 		}
 	}
 	
+	@Override
 	public void setPlayerComputerGame() {
-		if (nifty != null) nifty.exit();
+		if (nifty != null)
+			nifty.exit();
 		stateManager.attach(new TBNPlayerComputerGameController());
 	}
 	
+	@Override
 	public void setPlayerPlayerController() {
-		if (nifty != null) nifty.exit();
+		if (nifty != null)
+			nifty.exit();
 		stateManager.attach(new TBNPlayerPlayerGameController());
 	}
 	
+	@Override
 	public void cancel() {
-		if (nifty != null) nifty.exit();
+		if (nifty != null)
+			nifty.exit();
 		stateManager.attach(new TBNMainMenuController());
 	}
 
-	public void bind(Nifty nifty, Screen screen) { 
+	public void bind(Nifty nifty, Screen screen) {
 		this.nifty = nifty;
 		this.screen = screen;
 	}

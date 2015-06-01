@@ -7,13 +7,19 @@
             <panel id="GPanel0" height="100.0%" style="nifty-panel-simple" width="100.0%" childLayout="center">
                 <panel id="GPanel5" height="70.0%" style="nifty-panel-simple" width="50%" childLayout="vertical">
                     <panel id="GPanel6" height="33.0%" style="nifty-panel-simple" width="100.0%" childLayout="center">
-                        <control name="button" id="GButton1" height="30.0%" width="50.0%" label="Gracz vs komputer" childLayout="center"/>
+                        <control name="button" id="GButton1" height="30.0%" width="50.0%" label="Gracz vs komputer" childLayout="center">
+                        	<interact onClick="setPlayerComputerGame()"/>
+                        </control>
                     </panel>
                     <panel id="GPanel7" height="33.0%" style="nifty-panel-simple" width="100.0%" childLayout="center">
-                        <control name="button" id="GButton2" height="30.0%" width="50.0%" label="Gracz vs gracz" childLayout="center"/>
+                        <control name="button" id="GButton2" height="30.0%" width="50.0%" label="Gracz vs gracz" childLayout="center">
+                        	<interact onClick="setPlayerPlayerController()"/>
+                        </control>
                     </panel>
                     <panel id="GPanel8" height="34.0%" style="nifty-panel-simple" width="100.0%" childLayout="center">
-                        <control name="button" id="GButton3" height="30.0%" width="50.0%" label="Anuluj" childLayout="center"/>
+                        <control name="button" id="GButton3" height="30.0%" width="50.0%" label="Anuluj" childLayout="center">
+                        	<interact onClick="cancel()"/>
+                        </control>
                     </panel>
                 </panel>
             </panel>
