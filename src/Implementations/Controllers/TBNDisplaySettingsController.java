@@ -10,6 +10,7 @@ import com.jme3.app.state.AppStateManager;
 
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.NiftyEventSubscriber;
+import de.lessvoid.nifty.controls.Label;
 import de.lessvoid.nifty.controls.RadioButton;
 import de.lessvoid.nifty.controls.RadioButtonStateChangedEvent;
 import de.lessvoid.nifty.elements.Element;
@@ -38,7 +39,6 @@ public class TBNDisplaySettingsController extends AbstractAppState implements Sc
 //			Element element = screen.findElementByName("GRadioButton1");
 //			element.getNiftyControl(RadioButton.class).select();
 //			<screen id="ustawieniaWyswietlania" controller="PakietyPodstawowe.Kontroler.KontrolerUstawie�Wy�wietlania">
-			
 		} catch (Exception ex) { ex.printStackTrace(); }
 	}
 	

@@ -16,7 +16,8 @@ import de.lessvoid.nifty.screen.ScreenController;
  *
  * @author Filip
  */
-public final class TBNNewGameMenuController extends AbstractAppState implements ScreenController, NewGameMenuController {
+public final class TBNNewGameMenuController extends AbstractAppState
+		implements ScreenController, NewGameMenuController {
 
 	private TBNNewGameMenuModel newGameMenuModel;
 	private SimpleApplication app;
@@ -37,21 +38,21 @@ public final class TBNNewGameMenuController extends AbstractAppState implements 
 			ex.printStackTrace();
 		}
 	}
-	
+
 	@Override
 	public void setPlayerComputerGame() {
 		if (nifty != null)
 			nifty.exit();
-		stateManager.attach(new TBNPlayerComputerGameController());
+		stateManager.attach(new TBNPlayerComputerMenuGameController());
 	}
-	
+
 	@Override
 	public void setPlayerPlayerController() {
 		if (nifty != null)
 			nifty.exit();
 		stateManager.attach(new TBNPlayerPlayerGameController());
 	}
-	
+
 	@Override
 	public void cancel() {
 		if (nifty != null)
