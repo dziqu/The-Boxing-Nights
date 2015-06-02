@@ -23,7 +23,8 @@ public class TBNPlayerComputerNewGameController extends AbstractAppState impleme
 			super.initialize(stateManager, app);
 			this.app = (SimpleApplication) app;
 			tbnPlayerComputerNewGameModel = new TBNPlayerComputerNewGameModel(this.app, this);
-			tbnPlayerComputerNewGameModel.loadGame();
+//			tbnPlayerComputerNewGameModel.loadGame();
+			stateManager.attach(tbnPlayerComputerNewGameModel);
 			
 		} catch (Exception ex) {
 			ex.printStackTrace();

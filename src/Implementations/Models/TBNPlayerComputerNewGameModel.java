@@ -16,6 +16,7 @@ import com.jme3.bullet.collision.shapes.CapsuleCollisionShape;
 import com.jme3.bullet.control.BetterCharacterControl;
 import com.jme3.bullet.control.CharacterControl;
 import com.jme3.bullet.control.RigidBodyControl;
+import com.jme3.input.ChaseCamera;
 import com.jme3.input.FlyByCamera;
 import com.jme3.input.InputManager;
 import com.jme3.input.KeyInput;
@@ -23,15 +24,15 @@ import com.jme3.input.controls.ActionListener;
 import com.jme3.input.controls.KeyTrigger;
 import com.jme3.light.DirectionalLight;
 import com.jme3.math.ColorRGBA;
+import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
-import com.jme3.post.FilterPostProcessor;
 import com.jme3.renderer.Camera;
 import com.jme3.renderer.ViewPort;
+import com.jme3.scene.CameraNode;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
+import com.jme3.scene.control.CameraControl.ControlDirection;
 import com.jme3.scene.plugins.blender.BlenderModelLoader;
-import com.jme3.shadow.DirectionalLightShadowFilter;
-import com.jme3.shadow.DirectionalLightShadowRenderer;
 
 import Implementations.Controllers.TBNPlayerComputerNewGameController;
 import Implementations.Others.IO;
@@ -44,8 +45,6 @@ public class TBNPlayerComputerNewGameModel extends AbstractAppState implements A
 	private BulletAppState bulletAppState;
 	private AppStateManager stateManager;
 	private TBNPlayerComputerNewGameController tbnPlayerComputerNewGameController;
-	private Node ring;
-	private Node player1;
 	private CapsuleCollisionShape capsuleCollisionShape;
 	private BetterCharacterControl character;
 	private RigidBodyControl landscape;
@@ -60,6 +59,20 @@ public class TBNPlayerComputerNewGameModel extends AbstractAppState implements A
 	private AnimControl animationControl;
 	private AnimChannel animationChannel;
 	private ViewPort viewPort;
+	private Node player1;
+	private RigidBodyControl ringControl;
+	private Node ring;
+	private BetterCharacterControl player1Control;
+	private ChaseCamera chaseCam;
+	private Node player2;
+	private BetterCharacterControl player2Control;
+	private float player2x = 0;
+	private float player2y = 1;
+	private float player2z = 0;
+	private float player1x = 0;
+	private float player1y = 1;
+	private float player1z = 0;
+	private CameraNode camNode;
 
 	public TBNPlayerComputerNewGameModel(Application app,
 			TBNPlayerComputerNewGameController tbnPlayerComputerNewGameController) {
@@ -75,6 +88,8 @@ public class TBNPlayerComputerNewGameModel extends AbstractAppState implements A
 		bulletAppState = new BulletAppState();
 		stateManager.attach(bulletAppState);
 		flyCam.setMoveSpeed(50f);
+		
+		loadGame();
 	}
 
 	public void loadGame() {
@@ -83,64 +98,84 @@ public class TBNPlayerComputerNewGameModel extends AbstractAppState implements A
         sun.setColor(ColorRGBA.White);
         sun.setDirection(cam.getDirection());
         rootNode.addLight(sun);
-		
-		assetManager.registerLoader(BlenderModelLoader.class, "blend");
-		ring = (Node) assetManager.loadModel("Assets/Models/ring/ring.blend");
-		ring.setName("ring");
-		rootNode.attachChild(ring);
-		RigidBodyControl phy = new RigidBodyControl(0f);
-		ring.addControl(phy);
-		bulletAppState.getPhysicsSpace().add(phy);
+        
+        assetManager.registerLoader(BlenderModelLoader.class, "blend");
+        
+        ring = (Node) assetManager.loadModel("Assets/Models/ring/ring.blend");
+        ringControl = new RigidBodyControl(0f);
+        ring.addControl(ringControl);
+        bulletAppState.getPhysicsSpace().add(ringControl);
+        rootNode.attachChild(ring);
+        
 
-		cam.setLocation(new Vector3f(0f, 5f, 20f));
+        player1 = (Node) assetManager.loadModel("Assets/Models/player/player.blend");
+        player1.setLocalScale(0.03f);
+        player1.setLocalTranslation(9, 1, -9);
+        player1.rotate(new Quaternion().fromAngles(50,50,50));
+        player1Control = new BetterCharacterControl(0.3f, 2.5f, 8f);
+        player1Control.setJumpForce(new Vector3f(30f, 300f, 3f));
+        player1.addControl(player1Control);
+        bulletAppState.getPhysicsSpace().add(player1Control);
+        rootNode.attachChild(player1);
+        
+        player2 = (Node) assetManager.loadModel("Assets/Models/player/player.blend");
+        player2.setLocalScale(0.03f);
+        player2.setLocalTranslation(-9, 1, 9);
+        player2.rotate(new Quaternion().fromAngles(50,50,50));
+        player2Control = new BetterCharacterControl(0.3f, 2.5f, 8f);
+        player2Control.setJumpForce(new Vector3f(30f, 300f, 3f));
+        player2.addControl(player2Control);
+        bulletAppState.getPhysicsSpace().add(player2Control);
+        rootNode.attachChild(player2);
 		
-//		TODO: wersja dla ogre
-//		player1 = (Node) assetManager.loadModel("Assets/Models/playerOgre/Genesis2Male-geom.mesh.xml");
+        chaseCam = new ChaseCamera(cam, player1, inputManager);
+//        TODO: camera
+//        cam.setRotation(new Quaternion().fromAngles(180, 0, 0));
+//        camNode = new CameraNode("CamNode", cam);
+//        camNode.setControlDir(ControlDirection.SpatialToCamera);
+//        player1.attachChild(camNode);
+//        camNode.setLocalTranslation(new Vector3f(550, 350, -30));
+//        camNode.lookAt(player1.getLocalTranslation(), Vector3f.UNIT_Y);
+//        flyCam.setEnabled(false);
+        
+        
+		// TODO: łączyć spodnie z meshem
+		Node node1 = (Node) player1.getChild("RootNode");
+		Node node2 = (Node) player1.getChild("Genesis2Male-skinInstance");
+		Node node3 = (Node) player2.getChild("RootNode");
+		Node node4 = (Node) player2.getChild("Genesis2Male-skinInstance");
+		node2.lookAt(new Vector3f(0,-90,0), new Vector3f(0,0,0));
 		
-//		TODO: wersja dla blendera
-		player1 = (Node) assetManager.loadModel("Assets/Models/player/player.blend");
-		
-		player1.setLocalScale(0.03f);
-		rootNode.attachChild(player1);
-		CapsuleCollisionShape capsule = new CapsuleCollisionShape(1f, 1f);
-		character = new BetterCharacterControl(0.3f, 2.5f, 8f);
-		character.setJumpForce(new Vector3f(30f, 300f, 3f));
-		player1.addControl(character);
-		bulletAppState.getPhysicsSpace().add(character);
-		
-//		TODO: wersja dla ogre
-//		animationControl = player1.getControl(AnimControl.class);
-		
-//		TODO: wersja dla blendera
-		Spatial node1 = player1.getChild("RootNode");
-		Spatial node2 = player1.getChild("Genesis2Male-skinInstance");
-		IO.printL(node2);
+		IO.printL(node3.getChildren());
 		animationControl = node2.getControl(AnimControl.class);
-		
-		IO.printL(animationControl);
+//		IO.printL(animationControl);
 		
 		animationControl.addListener(this);
 		animationChannel = animationControl.createChannel();
 		List animations = new ArrayList(animationControl.getAnimationNames());
 		IO.printL(animations);
-//		animationChannel.setAnim("stay");
 
 		inputManager.addMapping("CharLeft", new KeyTrigger(KeyInput.KEY_A));
 		inputManager.addMapping("CharRight", new KeyTrigger(KeyInput.KEY_D));
 		inputManager.addMapping("CharForward", new KeyTrigger(KeyInput.KEY_W));
 		inputManager.addMapping("CharBackward", new KeyTrigger(KeyInput.KEY_S));
-		inputManager.addMapping("CharJump", new KeyTrigger(KeyInput.KEY_RETURN));
-		inputManager.addMapping("CharAttack", new KeyTrigger(KeyInput.KEY_SPACE));
+		inputManager.addMapping("CharJump", new KeyTrigger(KeyInput.KEY_SPACE));
 		inputManager.addListener(this, "CharLeft", "CharRight");
 		inputManager.addListener(this, "CharForward", "CharBackward");
-		inputManager.addListener(this, "CharJump", "CharAttack");
+		inputManager.addListener(this, "CharJump");
+	}
+	
+	@Override
+	public void update(float tpf) {
+		
 	}
 
 	@Override
 	public void onAction(String binding, boolean value, float tpf) {
 		if (binding.equals("CharLeft")) {
-			if (value)
+			if (value){
 				left = true;
+			}
 			else
 				left = false;
 		} else if (binding.equals("CharRight")) {
@@ -149,8 +184,10 @@ public class TBNPlayerComputerNewGameModel extends AbstractAppState implements A
 			else
 				right = false;
 		} else if (binding.equals("CharForward")) {
-			if (value)
+			if (value) {
 				up = true;
+				player1Control.setWalkDirection(new Vector3f(1, 0, 5));
+			}
 			else
 				up = false;
 		} else if (binding.equals("CharBackward")) {
@@ -158,11 +195,8 @@ public class TBNPlayerComputerNewGameModel extends AbstractAppState implements A
 				down = true;
 			else
 				down = false;
-		} else if (binding.equals("CharJump"))
-			character.jump();
-
-		if (binding.equals("CharAttack")) {
-			character.jump();
+		} else if (binding.equals("CharJump")) {
+			player1Control.resetForward(new Vector3f(-1, 0, 1));
 		}
 	}
 
