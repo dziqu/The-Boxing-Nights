@@ -23,16 +23,17 @@ import com.jme3.input.KeyInput;
 import com.jme3.input.controls.ActionListener;
 import com.jme3.input.controls.KeyTrigger;
 import com.jme3.light.DirectionalLight;
+import com.jme3.material.Material;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
 import com.jme3.renderer.Camera;
 import com.jme3.renderer.ViewPort;
 import com.jme3.scene.CameraNode;
+import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
-import com.jme3.scene.Spatial;
-import com.jme3.scene.control.CameraControl.ControlDirection;
 import com.jme3.scene.plugins.blender.BlenderModelLoader;
+import com.jme3.scene.shape.Box;
 
 import Implementations.Controllers.TBNPlayerComputerNewGameController;
 import Implementations.Others.IO;
@@ -75,6 +76,7 @@ public class TBNPlayerComputerNewGameModel extends AbstractAppState implements A
 	private CameraNode camNode;
 	private Node node2;
 	private Node node4;
+	private Geometry blue;
 
 	public TBNPlayerComputerNewGameModel(Application app,
 			TBNPlayerComputerNewGameController tbnPlayerComputerNewGameController) {
@@ -111,7 +113,7 @@ public class TBNPlayerComputerNewGameModel extends AbstractAppState implements A
         
 
         player1 = (Node) assetManager.loadModel("Assets/Models/player/player.blend");
-        player1.setLocalScale(3f);
+        player1.setLocalScale(0.03f);
         player1.setLocalTranslation(9, 1, -9);
         player1.rotate(new Quaternion().fromAngles(50,50,50));
         player1Control = new BetterCharacterControl(0.3f, 2.5f, 8f);
@@ -121,7 +123,7 @@ public class TBNPlayerComputerNewGameModel extends AbstractAppState implements A
         rootNode.attachChild(player1);
         
         player2 = (Node) assetManager.loadModel("Assets/Models/player/player.blend");
-        player2.setLocalScale(3f);
+        player2.setLocalScale(0.03f);
         player2.setLocalTranslation(-2, 1, 3);
         player2.rotate(new Quaternion().fromAngles(50,50,50));
         player2Control = new BetterCharacterControl(0.3f, 2.5f, 8f);
@@ -154,7 +156,6 @@ public class TBNPlayerComputerNewGameModel extends AbstractAppState implements A
 		
 		animationControl.addListener(this);
 		animationChannel = animationControl.createChannel();
-		animationChannel.setAnim("garda");
 		List animations = new ArrayList(animationControl.getAnimationNames());
 		IO.printL(animations);
 
@@ -170,8 +171,28 @@ public class TBNPlayerComputerNewGameModel extends AbstractAppState implements A
 	
 	@Override
 	public void update(float tpf) {
-//		node2.lookAt(new Vector3f(0,-35,0), node4.getWorldTranslation());
-//		node4.lookAt(new Vector3f(0,-35,0), node2.getWorldTranslation());
+		createBox();
+		node2.lookAt(blue.getWorldTranslation(), Vector3f.UNIT_Y);
+		node4.lookAt(blue.getWorldTranslation(), Vector3f.UNIT_Y);
+		deleteBox();
+	}
+	
+	private void createBox() {
+		Box box1 = new Box(0.1f,0.1f,0.1f);
+        blue = new Geometry("Box", box1);
+        float x = ( player1.getWorldTranslation().x + player2.getWorldTranslation().x ) / 2; 
+        float y = ( player1.getWorldTranslation().y + player2.getWorldTranslation().y ) / 2;
+        float z = ( player1.getWorldTranslation().z + player2.getWorldTranslation().z ) / 2; 
+        blue.setLocalTranslation(new Vector3f(x,y,z));
+        Material mat1 = new Material(assetManager, 
+                "Common/MatDefs/Misc/Unshaded.j3md");
+        mat1.setColor("Color", ColorRGBA.Blue);
+        blue.setMaterial(mat1);
+        rootNode.attachChild(blue);
+	}
+	
+	private void deleteBox() {
+		rootNode.detachChild(blue);
 	}
 
 	@Override
