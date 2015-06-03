@@ -73,6 +73,8 @@ public class TBNPlayerComputerNewGameModel extends AbstractAppState implements A
 	private float player1y = 1;
 	private float player1z = 0;
 	private CameraNode camNode;
+	private Node node2;
+	private Node node4;
 
 	public TBNPlayerComputerNewGameModel(Application app,
 			TBNPlayerComputerNewGameController tbnPlayerComputerNewGameController) {
@@ -109,7 +111,7 @@ public class TBNPlayerComputerNewGameModel extends AbstractAppState implements A
         
 
         player1 = (Node) assetManager.loadModel("Assets/Models/player/player.blend");
-        player1.setLocalScale(0.03f);
+        player1.setLocalScale(3f);
         player1.setLocalTranslation(9, 1, -9);
         player1.rotate(new Quaternion().fromAngles(50,50,50));
         player1Control = new BetterCharacterControl(0.3f, 2.5f, 8f);
@@ -119,8 +121,8 @@ public class TBNPlayerComputerNewGameModel extends AbstractAppState implements A
         rootNode.attachChild(player1);
         
         player2 = (Node) assetManager.loadModel("Assets/Models/player/player.blend");
-        player2.setLocalScale(0.03f);
-        player2.setLocalTranslation(-9, 1, 9);
+        player2.setLocalScale(3f);
+        player2.setLocalTranslation(-2, 1, 3);
         player2.rotate(new Quaternion().fromAngles(50,50,50));
         player2Control = new BetterCharacterControl(0.3f, 2.5f, 8f);
         player2Control.setJumpForce(new Vector3f(30f, 300f, 3f));
@@ -141,10 +143,10 @@ public class TBNPlayerComputerNewGameModel extends AbstractAppState implements A
         
 		// TODO: łączyć spodnie z meshem
 		Node node1 = (Node) player1.getChild("RootNode");
-		Node node2 = (Node) player1.getChild("Genesis2Male-skinInstance");
+		node2 = (Node) player1.getChild("Genesis2Male-skinInstance");
 		Node node3 = (Node) player2.getChild("RootNode");
-		Node node4 = (Node) player2.getChild("Genesis2Male-skinInstance");
-		node2.lookAt(new Vector3f(0,-90,0), new Vector3f(0,0,0));
+		node4 = (Node) player2.getChild("Genesis2Male-skinInstance");
+		node2.lookAt(new Vector3f(0,-35,0), node4.getWorldTranslation());
 		
 		IO.printL(node3.getChildren());
 		animationControl = node2.getControl(AnimControl.class);
@@ -152,6 +154,7 @@ public class TBNPlayerComputerNewGameModel extends AbstractAppState implements A
 		
 		animationControl.addListener(this);
 		animationChannel = animationControl.createChannel();
+		animationChannel.setAnim("garda");
 		List animations = new ArrayList(animationControl.getAnimationNames());
 		IO.printL(animations);
 
@@ -167,36 +170,42 @@ public class TBNPlayerComputerNewGameModel extends AbstractAppState implements A
 	
 	@Override
 	public void update(float tpf) {
-		
+//		node2.lookAt(new Vector3f(0,-35,0), node4.getWorldTranslation());
+//		node4.lookAt(new Vector3f(0,-35,0), node2.getWorldTranslation());
 	}
 
 	@Override
 	public void onAction(String binding, boolean value, float tpf) {
 		if (binding.equals("CharLeft")) {
 			if (value){
+				player2Control.setWalkDirection(new Vector3f(1, 0, 2));
 				left = true;
 			}
 			else
 				left = false;
 		} else if (binding.equals("CharRight")) {
-			if (value)
+			if (value) {
 				right = true;
+				player2Control.setWalkDirection(new Vector3f(-1, 0, -2));
+			}
 			else
 				right = false;
 		} else if (binding.equals("CharForward")) {
 			if (value) {
 				up = true;
-				player1Control.setWalkDirection(new Vector3f(1, 0, 5));
+				player1Control.setWalkDirection(player2.getLocalTranslation());
 			}
 			else
 				up = false;
 		} else if (binding.equals("CharBackward")) {
-			if (value)
+			if (value) {
 				down = true;
+				player1Control.setWalkDirection(player2.getLocalTranslation().negate());
+			}
 			else
 				down = false;
 		} else if (binding.equals("CharJump")) {
-			player1Control.resetForward(new Vector3f(-1, 0, 1));
+			player1Control.setWalkDirection(player1.getLocalTranslation());
 		}
 	}
 
