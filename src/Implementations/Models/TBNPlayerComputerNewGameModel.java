@@ -15,6 +15,7 @@ import com.jme3.asset.AssetManager;
 import com.jme3.bullet.BulletAppState;
 import com.jme3.bullet.control.BetterCharacterControl;
 import com.jme3.bullet.control.RigidBodyControl;
+import com.jme3.bullet.util.CollisionShapeFactory;
 import com.jme3.input.ChaseCamera;
 import com.jme3.input.FlyByCamera;
 import com.jme3.input.InputManager;
@@ -26,8 +27,6 @@ import com.jme3.light.DirectionalLight;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector3f;
 import com.jme3.renderer.Camera;
-import com.jme3.renderer.ViewPort;
-import com.jme3.scene.CameraNode;
 import com.jme3.scene.Node;
 import com.jme3.scene.plugins.blender.BlenderModelLoader;
 
@@ -36,8 +35,7 @@ import Implementations.Others.IO;
 import jme3test.input.combomoves.ComboMove;
 import jme3test.input.combomoves.ComboMoveExecution;
 
-public class TBNPlayerComputerNewGameModel extends AbstractAppState implements
-		ActionListener, AnimEventListener {
+public class TBNPlayerComputerNewGameModel extends AbstractAppState implements ActionListener, AnimEventListener {
 
 	private SimpleApplication app;
 	private Node rootNode;
@@ -54,15 +52,12 @@ public class TBNPlayerComputerNewGameModel extends AbstractAppState implements
 	private Camera cam;
 	private AnimControl player1AnimationControl;
 	private AnimChannel player1AnimationChannel;
-	private ViewPort viewPort;
 	private Node player1;
 	private RigidBodyControl ringControl;
 	private Node ring;
 	private BetterCharacterControl player1Control;
-	private ChaseCamera chaseCam;
 	private Node player2;
 	private BetterCharacterControl player2Control;
-	private CameraNode camNode;
 	private Node node2;
 	private Node node4;
 	private Vector3f walkDir;
@@ -86,7 +81,6 @@ public class TBNPlayerComputerNewGameModel extends AbstractAppState implements
 	private final int downKey = KeyInput.KEY_S;
 	private final int spaceKey = KeyInput.KEY_SPACE;
 	private final int leftHandKey = KeyInput.KEY_Q;
-	private final int rightHandKey = KeyInput.KEY_E;
 	private final String changePositionAnimationName = "changePosition";
 	private final String guardAnimationName = "guard";
 	private final String leftJabAnimationName = "leftJab";
@@ -96,7 +90,6 @@ public class TBNPlayerComputerNewGameModel extends AbstractAppState implements
 	private final String downKeyName = "down";
 	private final String spaceKeyName = "space";
 	private final String leftHandKeyName = "leftHand";
-	private final String rightHandKeyName = "rightHand";
 	private final String upAndLeftComboName = "upAndLeft";
 	private final String upAndRightComboName = "upAndRight";
 	private final String downAndLeftComboName = "downAndLeft";
@@ -115,27 +108,27 @@ public class TBNPlayerComputerNewGameModel extends AbstractAppState implements
 	private boolean space;
 	private ComboMove leftJabCombo;
 	private ComboMoveExecution leftJabComboExec;
+	private Node boxNode1;
+	private Node boxNode2;
 
-	public TBNPlayerComputerNewGameModel(
-			Application app,
+	public TBNPlayerComputerNewGameModel(Application app,
 			TBNPlayerComputerNewGameController tbnPlayerComputerNewGameController) {
-		this.app 		= (SimpleApplication) app;
-		rootNode		= this.app.getRootNode();
-		assetManager 	= this.app.getAssetManager();
-		stateManager 	= this.app.getStateManager();
-		inputManager 	= this.app.getInputManager();
-		flyCam 			= this.app.getFlyByCamera();
-		cam 			= this.app.getCamera();
-		viewPort 		= this.app.getViewPort();
-		this.tbnPlayerComputerNewGameController 
-						= tbnPlayerComputerNewGameController;
-		bulletAppState 	= new BulletAppState();
-		stateManager	.attach(bulletAppState);
-		flyCam			.setMoveSpeed(50f);
-		walkDir 		= new Vector3f();
+		this.app = (SimpleApplication) app;
+		rootNode = this.app.getRootNode();
+		assetManager = this.app.getAssetManager();
+		stateManager = this.app.getStateManager();
+		inputManager = this.app.getInputManager();
+		flyCam = this.app.getFlyByCamera();
+		cam = this.app.getCamera();
+		this.app.getViewPort();
+		this.tbnPlayerComputerNewGameController = tbnPlayerComputerNewGameController;
+		bulletAppState = new BulletAppState();
+		stateManager.attach(bulletAppState);
+		flyCam.setMoveSpeed(50f);
+		walkDir = new Vector3f();
 		pressedMappings = new HashSet<String>();
 		loadGame();
-		assetManager	.registerLoader(BlenderModelLoader.class, "blend");
+		assetManager.registerLoader(BlenderModelLoader.class, "blend");
 	}
 
 	public void loadGame() {
@@ -147,9 +140,8 @@ public class TBNPlayerComputerNewGameModel extends AbstractAppState implements
 		getPlayersNodes();
 		initAnimationsControls();
 		initAnimationsChannels();
-		
-		List animations = new ArrayList(
-				player1AnimationControl.getAnimationNames());
+
+		List animations = new ArrayList(player1AnimationControl.getAnimationNames());
 		IO.printL(animations);
 
 		if (player1AnimationChannel != null) {
@@ -158,19 +150,19 @@ public class TBNPlayerComputerNewGameModel extends AbstractAppState implements
 		if (player2AnimationChannel != null) {
 			player2AnimationChannel.setAnim(guardAnimationName);
 		}
-		
+
 		initKeys();
 		addListeners();
 		initCombos();
 	}
-	
+
 	private void addDirectionalLight() {
 		DirectionalLight sun = new DirectionalLight();
 		sun.setColor(ColorRGBA.White);
 		sun.setDirection(cam.getDirection());
 		rootNode.addLight(sun);
 	}
-	
+
 	private void initRingObject() {
 		ring = (Node) assetManager.loadModel("Assets/Models/ring/ring.blend");
 		ringControl = new RigidBodyControl(0f);
@@ -178,10 +170,9 @@ public class TBNPlayerComputerNewGameModel extends AbstractAppState implements
 		bulletAppState.getPhysicsSpace().add(ringControl);
 		rootNode.attachChild(ring);
 	}
-	
+
 	private void initPlayer1() {
-		player1 = (Node) assetManager
-				.loadModel("Assets/Models/player/player.blend");
+		player1 = (Node) assetManager.loadModel("Assets/Models/player/player.blend");
 		player1.setLocalScale(0.03f);
 		player1.setLocalTranslation(9, 1, -9);
 		player1Control = new BetterCharacterControl(0.3f, 2.5f, 8f);
@@ -191,10 +182,9 @@ public class TBNPlayerComputerNewGameModel extends AbstractAppState implements
 		bulletAppState.getPhysicsSpace().add(player1Control);
 		rootNode.attachChild(player1);
 	}
-	
+
 	private void initPlayer2() {
-		player2 = (Node) assetManager
-				.loadModel("Assets/Models/player/player.blend");
+		player2 = (Node) assetManager.loadModel("Assets/Models/player/player.blend");
 		player2.setLocalScale(0.03f);
 		player2.setLocalTranslation(-2, 1, 3);
 		player2Control = new BetterCharacterControl(0.3f, 2.5f, 8f);
@@ -204,30 +194,31 @@ public class TBNPlayerComputerNewGameModel extends AbstractAppState implements
 		bulletAppState.getPhysicsSpace().add(player2Control);
 		rootNode.attachChild(player2);
 	}
-	
+
 	private void initChaseCam() {
-		chaseCam = new ChaseCamera(cam, player1, inputManager);
+		new ChaseCamera(cam, player1, inputManager);
 	}
-	
+
 	private void getPlayersNodes() {
 		node1 = (Node) player1.getChild("RootNode");
+		IO.printL(node1.getChildren());
 		node2 = (Node) player1.getChild("Genesis2Male-skinInstance");
 		node3 = (Node) player2.getChild("RootNode");
 		node4 = (Node) player2.getChild("Genesis2Male-skinInstance");
 		node2.lookAt(new Vector3f(0, -35, 0), node4.getWorldTranslation());
 	}
-	
+
 	private void initAnimationsControls() {
 		player1AnimationControl = node2.getControl(AnimControl.class);
 		player2AnimationControl = node4.getControl(AnimControl.class);
 		player1AnimationControl.addListener(this);
 	}
-	
+
 	private void initAnimationsChannels() {
 		player1AnimationChannel = player1AnimationControl.createChannel();
 		player2AnimationChannel = player2AnimationControl.createChannel();
 	}
-	
+
 	private void initKeys() {
 		initKey(leftKeyName, leftKey);
 		initKey(rightKeyName, rightKey);
@@ -236,13 +227,13 @@ public class TBNPlayerComputerNewGameModel extends AbstractAppState implements
 		initKey(spaceKeyName, spaceKey);
 		initKey(leftHandKeyName, leftHandKey);
 	}
-	
+
 	private void addListeners() {
 		addListener(this, leftKeyName, rightKeyName);
 		addListener(this, upKeyName, downKeyName);
 		addListener(this, spaceKeyName, leftHandKeyName);
 	}
-	
+
 	private void initCombos() {
 		initUpAndLeftCombo();
 		initUpAndRightCombo();
@@ -250,50 +241,50 @@ public class TBNPlayerComputerNewGameModel extends AbstractAppState implements
 		initDownAndRightCombo();
 		initLeftJabCombo();
 	}
-	
+
 	private void initKey(String keyName, int keyValue) {
 		inputManager.addMapping(keyName, new KeyTrigger(keyValue));
 	}
-	
-	private void addListener(InputListener inputListener, String ... keysNames) {
+
+	private void addListener(InputListener inputListener, String... keysNames) {
 		inputManager.addListener(inputListener, keysNames);
 	}
-	
+
 	private void initUpAndLeftCombo() {
 		upAndLeft = new ComboMove(upAndLeftComboName);
 		upAndLeft.press(spaceKeyName, upKeyName, leftKeyName).done();
 		upAndLeft.setUseFinalState(false);
 		upAndLeftExec = new ComboMoveExecution(upAndLeft);
 	}
-	
+
 	private void initUpAndRightCombo() {
 		upAndRight = new ComboMove(upAndRightComboName);
 		upAndRight.press(spaceKeyName, upKeyName, rightKeyName).done();
 		upAndRight.setUseFinalState(false);
 		upAndRightExec = new ComboMoveExecution(upAndRight);
 	}
-	
+
 	private void initDownAndLeftCombo() {
 		downAndLeft = new ComboMove(downAndLeftComboName);
 		downAndLeft.press(spaceKeyName, downKeyName, leftKeyName).done();
 		downAndLeft.setUseFinalState(false);
 		downAndLeftExec = new ComboMoveExecution(downAndLeft);
 	}
-	
+
 	private void initDownAndRightCombo() {
 		downAndRight = new ComboMove(downAndRightComboName);
 		downAndRight.press(spaceKeyName, downKeyName, rightKeyName).done();
 		downAndRight.setUseFinalState(false);
 		downAndRightExec = new ComboMoveExecution(downAndRight);
 	}
-	
+
 	private void initLeftJabCombo() {
 		leftJabCombo = new ComboMove(leftJabComboName);
-		leftJabCombo.press(spaceKeyName, upKeyName, leftHandKeyName).done();;
+		leftJabCombo.press(spaceKeyName, upKeyName, leftHandKeyName).done();
 		leftJabCombo.setUseFinalState(false);
 		leftJabComboExec = new ComboMoveExecution(leftJabCombo);
 	}
-	
+
 	@Override
 	public void update(float tpf) {
 		walkDir.set(0, 0, 0);
@@ -319,36 +310,42 @@ public class TBNPlayerComputerNewGameModel extends AbstractAppState implements
 				Vector3f vectorToSet = null;
 				String animationNameToSet = null;
 				switch (comboName) {
-					case upAndLeftComboName: {
-						vectorToSet = upAndLeftVector;
-						animationNameToSet = changePositionAnimationName;
-						break;
-					} case upAndRightComboName: {
-						vectorToSet = upAndRightVector;
-						animationNameToSet = changePositionAnimationName;
-						break;
-					} case downAndLeftComboName: {
-						vectorToSet = downAndLeftVector;
-						animationNameToSet = changePositionAnimationName;
-						break;
-					} case downAndRightComboName: {
-						vectorToSet = downAndRightVector;
-						animationNameToSet = changePositionAnimationName;
-						break;
-					} case leftJabComboName: {
-						animationNameToSet = leftJabAnimationName;
-						break;
-					} default: {
-						animationNameToSet = guardAnimationName;
-						break;
-					}	
+				case upAndLeftComboName: {
+					vectorToSet = upAndLeftVector;
+					animationNameToSet = changePositionAnimationName;
+					break;
 				}
-				
-				if (vectorToSet != null) setVector(walkDir, vectorToSet);
+				case upAndRightComboName: {
+					vectorToSet = upAndRightVector;
+					animationNameToSet = changePositionAnimationName;
+					break;
+				}
+				case downAndLeftComboName: {
+					vectorToSet = downAndLeftVector;
+					animationNameToSet = changePositionAnimationName;
+					break;
+				}
+				case downAndRightComboName: {
+					vectorToSet = downAndRightVector;
+					animationNameToSet = changePositionAnimationName;
+					break;
+				}
+				case leftJabComboName: {
+					animationNameToSet = leftJabAnimationName;
+					break;
+				}
+				default: {
+					animationNameToSet = guardAnimationName;
+					break;
+				}
+				}
+
+				if (vectorToSet != null)
+					setVector(walkDir, vectorToSet);
 				if (animationNameToSet != null) {
 					setAnimation(player1AnimationChannel, animationNameToSet);
 				}
-				
+
 				currentMoveCastTime = 0;
 				currentMove = null;
 			}
@@ -374,28 +371,24 @@ public class TBNPlayerComputerNewGameModel extends AbstractAppState implements
 			} else {
 				animationToSetName = guardAnimationName;
 			}
-			
 			if (vectorToSetName != null) {
 				setVector(walkDir, vectorToSetName);
 			}
 			if (animationToSetName != null) {
-				setAnimation(player1AnimationChannel, animationToSetName); 
+				setAnimation(player1AnimationChannel, animationToSetName);
 			}
 		}
 	}
 
-	private void setWalkDirection(BetterCharacterControl characterControl,
-			Vector3f vector) {
+	private void setWalkDirection(BetterCharacterControl characterControl, Vector3f vector) {
 		characterControl.setWalkDirection(vector);
 	}
 
 	private void rotatePlayersNodes() {
-		node2.lookAt(
-				new Vector3f(node4.getWorldTranslation().x, -1000, node4
-						.getWorldTranslation().z), Vector3f.UNIT_Y);
-		node4.lookAt(
-				new Vector3f(node2.getWorldTranslation().x, -1000, node2
-						.getWorldTranslation().z), Vector3f.UNIT_Y);
+		node2.lookAt(new Vector3f(node4.getWorldTranslation().x, -1000, 
+				node4.getWorldTranslation().z), Vector3f.UNIT_Y);
+		node4.lookAt(new Vector3f(node2.getWorldTranslation().x, -1000, 
+				node2.getWorldTranslation().z), Vector3f.UNIT_Y);
 	}
 
 	private void setAnimation(AnimChannel animationChannel, String animationName) {
@@ -416,31 +409,41 @@ public class TBNPlayerComputerNewGameModel extends AbstractAppState implements
 
 	private void initKeys(String name, boolean value, float tpf) {
 		switch (name) {
-			case leftKeyName: {
-				if (value) 	left = true;
-				else 		left = false;
-				break;
-			}
-			case rightKeyName: {
-				if (value) 	right = true;
-				else 		right = false;
-				break;
-			}
-			case upKeyName: {
-				if (value) 	up = true;
-				else 		up = false;
-				break;
-			}
-			case downKeyName: {
-				if (value) 	down = true;
-				else 		down = false;
-				break;
-			}
-			case spaceKeyName: {
-				if (value) 	space = true;
-				else 		space = false;
-				break;
-			}
+		case leftKeyName: {
+			if (value)
+				left = true;
+			else
+				left = false;
+			break;
+		}
+		case rightKeyName: {
+			if (value)
+				right = true;
+			else
+				right = false;
+			break;
+		}
+		case upKeyName: {
+			if (value)
+				up = true;
+			else
+				up = false;
+			break;
+		}
+		case downKeyName: {
+			if (value)
+				down = true;
+			else
+				down = false;
+			break;
+		}
+		case spaceKeyName: {
+			if (value)
+				space = true;
+			else
+				space = false;
+			break;
+		}
 		}
 	}
 
@@ -464,11 +467,11 @@ public class TBNPlayerComputerNewGameModel extends AbstractAppState implements
 		} else if (leftJabComboExec.updateState(pressedMappings, time)) {
 			comboToAdding = leftJabCombo;
 		}
-		
+
 		if (comboToAdding != null) {
 			invokedMoves.add(comboToAdding);
 		}
-		
+
 		if (invokedMoves.size() > 0) {
 			float priority = 0;
 			ComboMove toExec = null;
@@ -478,8 +481,7 @@ public class TBNPlayerComputerNewGameModel extends AbstractAppState implements
 					toExec = move;
 				}
 			}
-			if (currentMove != null
-					&& currentMove.getPriority() > toExec.getPriority()) {
+			if (currentMove != null && currentMove.getPriority() > toExec.getPriority()) {
 				return;
 			}
 			currentMove = toExec;
