@@ -129,7 +129,6 @@ public class TBNPlayerComputerNewGameModel extends AbstractAppState implements A
 		pressedMappings = new HashSet<String>();
 		loadGame();
 		assetManager.registerLoader(BlenderModelLoader.class, "blend");
-		// komentarz testowy
 	}
 
 	public void loadGame() {
