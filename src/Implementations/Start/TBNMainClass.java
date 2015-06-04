@@ -7,8 +7,8 @@ import java.util.List;
 import Enums.DefaultControlSettings;
 import Enums.Names;
 import Implementations.Controllers.TBNMainMenuController;
-import Implementations.Others.TBNDisplaySettings;
 import Implementations.Others.IO;
+import Implementations.Others.TBNDisplaySettings;
 import Interfaces.Collator;
 import Interfaces.MainClass;
 
@@ -29,7 +29,6 @@ public final class TBNMainClass extends SimpleApplication implements MainClass {
         app.loadCurrentDisplaySettings();
         app.setDisplaySettings();
         isDisplayViewActive(true);
-        
         app.start();
     }
     

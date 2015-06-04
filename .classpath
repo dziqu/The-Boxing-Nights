@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk1.8.0_45"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="lib" path="/home/filip/Dokumenty/jME3_2014-06-12/lib/eventbus.jar"/>
 	<classpathentry kind="lib" path="/home/filip/Dokumenty/jME3_2014-06-12/lib/gluegen-rt.jar"/>
 	<classpathentry kind="lib" path="/home/filip/Dokumenty/jME3_2014-06-12/lib/jbullet.jar"/>
@@ -34,7 +34,7 @@
 	<classpathentry kind="lib" path="/home/filip/Dokumenty/jME3_2014-06-12/lib/stack-alloc.jar"/>
 	<classpathentry kind="lib" path="/home/filip/Dokumenty/jME3_2014-06-12/lib/vecmath.jar"/>
 	<classpathentry kind="lib" path="/home/filip/Dokumenty/jME3_2014-06-12/lib/xmlpull-xpp3.jar"/>
-	<classpathentry kind="lib" path="/home/filip/Dokumenty/jME3_2014-06-12/jMonkeyEngine3.jar"/>
 	<classpathentry kind="lib" path="/home/filip/Dokumenty/apache/commons-io-2.4/commons-io-2.4.jar"/>
+	<classpathentry kind="lib" path="/home/filip/Dokumenty/jME3_2014-06-12/jMonkeyEngine3.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
