@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="Scenes1">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/src/Assets/Scenes/wildhouse.zip!/" />
+      <root url="jar://$PROJECT_DIR$/src/Assets/Scenes/quake3level.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

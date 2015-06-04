@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<nifty xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://nifty-gui.lessvoid.com/nifty-gui" xsi:schemaLocation="https://raw.githubusercontent.com/void256/nifty-gui/1.4/nifty-core/src/main/resources/nifty.xsd https://raw.githubusercontent.com/void256/nifty-gui/1.4/nifty-core/src/main/resources/nifty.xsd">
+    <useControls filename="nifty-default-controls.xml"/>
+    <useStyles filename="nifty-default-styles.xml"/>
+    <screen id="playerComputerMenu" controller="Implementations.Controllers.TBNPlayerComputerMenuGameController">
+        <layer id="GLayer1" childLayout="center">
+            <panel id="GPanel9" height="100.0%" style="nifty-panel-simple" width="100.0%" childLayout="center">
+                <panel id="GPanel10" height="70.0%" style="nifty-panel-simple" width="50.0%" childLayout="vertical">
+                    <panel id="GPanel11" height="33.0%" style="nifty-panel-simple" width="100.0%" childLayout="center">
+                        <control name="textfield" id="GTextfield0" width="50%"/>
+                    </panel>
+                    <panel id="GPanel12" height="33.0%" style="nifty-panel-simple" width="100.0%" childLayout="center">
+                        <control name="label" id="GLabel0" text="GLabel0" height="50px" font="aurulent-sans-16.fnt" width="100px"/>
+                    </panel>
+                    <panel id="GPanel13" height="34.0%" style="nifty-panel-simple" width="100.0%" childLayout="horizontal">
+                        <panel id="GPanel15" height="100.0%" style="nifty-panel-simple" width="50%" childLayout="center">
+                            <control name="button" id="GButton4" height="30.0%" width="65.0%" label="Anuluj" childLayout="center" y="62" x="60">
+                            	<interact onClick="cancel()"/>
+                            </control>
+                        </panel>
+                        <panel id="GPanel16" height="100.0%" style="nifty-panel-simple" width="50%" childLayout="center">
+                            <control name="button" id="GButton5" height="30.0%" width="65.0%" label="Ok" childLayout="center">
+                            	<interact onClick="ok()"/>
+                            </control>
+                        </panel>
+                    </panel>
+                </panel>
+            </panel>
+        </layer>
+    </screen>
+</nifty>
